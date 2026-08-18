@@ -561,21 +561,55 @@ function format(n) {
    STOCK
 ========================= */
 
-function hitungStock() {
+async function simpanStock() {
   var awal = angka("stokAwal");
   var masuk = angka("masuk");
   var akhir = angka("stokAkhir");
 
-  /*
-    RUMUS KELUAR:
-    (Stok Awal + Masuk) - Stok Akhir
-  */
   var keluar = (awal + masuk) - akhir;
-  if (keluar < 0) keluar = 0;
 
-  document.getElementById("stokFisik").textContent = format(keluar) + " ekor";
+  if (keluar < 0) {
+    keluar = 0;
+  }
+
+  var data = {
+    tanggal: new Date().toLocaleDateString("id-ID"),
+    stokAwal: awal,
+    masuk: masuk,
+    keluar: keluar,
+    stokAkhir: akhir
+  };
+
+  document.getElementById("saveStatus").textContent =
+    "⏳ Menyimpan...";
+
+  try {
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbzhuWCmyvynT-TmqIylEOGY52m2XUyjbqLddYCavrPvfNqaZWYVa4wo49yXMRlb_kberg/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(data)
+      }
+    );
+
+    localStorage.setItem("stockAyam", JSON.stringify({
+      tanggal: new Date().toISOString(),
+      stokAwal: awal,
+      masuk: masuk,
+      stokAkhir: akhir
+    }));
+
+    document.getElementById("saveStatus").textContent =
+      "✓ Stock ayam tersimpan ke Google Sheets";
+
+  } catch (error) {
+
+    document.getElementById("saveStatus").textContent =
+      "❌ Gagal menyimpan ke Google Sheets";
+
+    console.error(error);
+  }
 }
-
 
 /* =========================
    PENJUALAN
