@@ -3,82 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Ayam Guling Enakko</title>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   background: #f5f1e8;
   color: #29251f;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .app {
   width: 100%;
   max-width: 430px;
   margin: auto;
-  padding: 15px 14px 35px;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 78px;
 }
 
-/* =========================
-   BANNER
-========================= */
+.pagewrap { padding: 15px 14px 24px; }
 
+.page { display: none; }
+.page.active { display: block; }
+
+/* ========= BANNER ========= */
 .banner {
   width: 100%;
-  height: 190px;
+  height: 150px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
   margin-bottom: 15px;
-  box-shadow: 0 5px 18px rgba(80, 30, 0, .15);
+  box-shadow: 0 5px 18px rgba(80,30,0,.15);
+  background: linear-gradient(135deg, #d71920 0%, #a3120c 60%, #6e0d09 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
 }
+.banner .b-emoji { font-size: 54px; filter: drop-shadow(0 4px 6px rgba(0,0,0,.25)); }
+.banner .b-text { color: #fff7ec; text-align: right; }
+.banner .b-text .b-title { font-size: 20px; font-weight: 800; letter-spacing: -.3px; }
+.banner .b-text .b-sub { font-size: 11px; opacity: .85; margin-top: 3px; }
 
-.banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
+/* ========= HEADER ========= */
+.header { margin-bottom: 14px; padding: 0 3px; }
+.header h1 { margin: 0; color: #d71920; font-size: 23px; font-weight: 800; letter-spacing: -0.5px; }
+.header p { margin: 4px 0 0; color: #8d806d; font-size: 12px; }
+.section-title { font-size: 13px; font-weight: 700; color: #29251f; margin: 4px 3px 8px; display:flex; align-items:center; gap:6px; }
+.section-title small { font-weight: 400; color: #9a8f7d; font-size: 10px; }
 
-/* =========================
-   HEADER
-========================= */
-
-.header {
-  margin-bottom: 16px;
-  padding: 0 3px;
-}
-
-.header h1 {
-  margin: 0;
-  color: #d71920;
-  font-size: 25px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-
-.header p {
-  margin: 4px 0 0;
-  color: #8d806d;
-  font-size: 12px;
-}
-
-/* =========================
-   CARD
-========================= */
-
+/* ========= CARD ========= */
 .card {
   background: #fff;
   border-radius: 18px;
@@ -87,513 +65,331 @@ body {
   overflow: hidden;
   box-shadow: 0 3px 12px rgba(55,45,30,.05);
 }
+.card-head { padding: 15px 17px 12px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid #f0e9df; }
+.icon { width: 34px; height: 34px; border-radius: 10px; background: #fff0cf; display: flex; justify-content: center; align-items: center; font-size: 17px; flex-shrink:0; }
+.card-head h2 { margin: 0; font-size: 14px; color: #29251f; }
+.card-head span { display: block; color: #9a8f7d; font-size: 10px; margin-top: 2px; }
 
-.card-head {
-  padding: 15px 17px 12px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  border-bottom: 1px solid #f0e9df;
-}
+/* ========= STOCK ========= */
+.stock-body { padding: 0 17px 15px; }
+.stock-line { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #eee9df; }
+.stock-line:last-of-type { border-bottom: none; }
+.stock-label { font-size: 12px; }
+.number-input { width: 78px; height: 31px; border: 1px solid #dcd3c4; border-radius: 8px; text-align: center; font-family: monospace; font-weight: bold; font-size: 14px; background: #fff; }
+.stock-total { margin-top: 10px; padding: 11px 13px; border-radius: 10px; background: #29251f; color: white; display: flex; align-items: center; justify-content: space-between; }
+.stock-total label { font-size: 10px; color: #d9d3c8; }
+.stock-total-input-wrap { display: flex; align-items: center; gap: 6px; }
+.stock-total-input { width: 78px; height: 31px; border: 1px solid rgba(255,255,255,0.4); border-radius: 8px; text-align: center; font-family: monospace; font-weight: bold; font-size: 14px; background: rgba(255,255,255,0.15); color: #fff; }
+.stock-unit-label { font-size: 12px; font-weight: bold; color: #fff; }
 
-.icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: #fff0cf;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 17px;
-}
+.stock-actions { display: flex; gap: 7px; padding: 2px 3px 14px; }
+.stock-actions button { flex: 1; height: 38px; border-radius: 10px; font-size: 12px; cursor: pointer; font-weight:600; }
+.save { background: #d71920; color: white; border: none; }
+.reset { background: white; border: 1px solid #dcd3c4; color: #777; }
+.save-status { text-align: center; padding-bottom: 6px; font-size: 10px; color: #8a7f6c; min-height: 14px; }
 
-.card-head h2 {
-  margin: 0;
-  font-size: 14px;
-  color: #29251f;
-}
+/* ========= PENJUALAN (sales) ========= */
+.sale-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 17px; border-top: 1px solid #eee9df; }
+.sale-name { font-size: 13px; font-weight: 600; }
+.sale-name small { display: block; color: #999; font-size: 10px; font-weight: normal; margin-top: 2px; }
+.stepper { display: flex; align-items: center; gap: 7px; }
+.stepper button { width: 30px; height: 30px; border-radius: 50%; border: 1px solid #ddd5c8; background: white; font-size: 17px; cursor: pointer; }
+.stepper .plus { background: #d71920; border: none; color: white; }
+.stepper input { width: 40px; border: none; background: transparent; text-align: center; font-family: monospace; font-size: 15px; font-weight: bold; }
+.sale-total { background: #29251f; color: white; padding: 15px 17px; display: flex; justify-content: space-between; align-items: center; }
+.sale-total span:first-child { font-size: 11px; }
+.sale-total strong { font-family: monospace; font-size: 21px; }
 
-.card-head span {
-  display: block;
-  color: #9a8f7d;
-  font-size: 10px;
-  margin-top: 2px;
-}
+.penusukan { padding: 14px 17px 16px; background: #fff9e8; border-top: 3px solid #ffc400; }
+.penusukan-top { display: flex; justify-content: space-between; align-items: center; }
+.penusukan-title { font-size: 12px; font-weight: bold; }
+.penusukan-title small { display: block; color: #999; font-weight: normal; font-size: 10px; margin-top: 2px; }
+.penusukan-input { width: 72px; height: 34px; border: 1px solid #d8cfbf; border-radius: 9px; text-align: center; font-family: monospace; font-size: 16px; font-weight: bold; }
 
-/* =========================
-   STOCK
-========================= */
+.difference { margin-top: 12px; padding: 13px 14px; border-radius: 11px; display: flex; align-items: center; justify-content: space-between; }
+.difference-label { font-size: 11px; font-weight: bold; }
+.difference-desc { font-size: 9px; margin-top: 2px; opacity: .7; }
+.difference-number { font-family: monospace; font-size: 19px; font-weight: bold; }
 
-.stock-body {
-  padding: 0 17px 15px;
-}
+.sale-save { margin: 12px 17px 15px; height: 38px; border-radius: 10px; border: none; background: #d71920; color: #fff; font-weight: 600; font-size: 12px; width: calc(100% - 34px); cursor:pointer; }
 
-.stock-line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px 0;
-  border-bottom: 1px solid #eee9df;
-}
+/* ========= CHART CARD ========= */
+.chart-card { padding: 15px 17px 17px; }
+.chart-wrap { height: 200px; position: relative; margin-top: 6px; }
+.legend-list { margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+.legend-row { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.legend-name { flex: 1; color: #4a4235; }
+.legend-val { font-family: monospace; font-weight: 700; color: #29251f; }
 
-.stock-line:last-of-type {
-  border-bottom: none;
-}
+/* ========= RIWAYAT (history) ========= */
+.riwayat-head { display:flex; align-items:center; justify-content:space-between; padding: 15px 17px 10px; }
+.riwayat-head h2 { margin:0; font-size:14px; }
+.filter-select { border:1px solid #dcd3c4; border-radius:8px; font-size:11px; padding:6px 8px; background:#fff; font-family:inherit; }
+.table-scroll { overflow-x: auto; padding: 0 17px 15px; }
+table.riwayat-table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 11px; }
+table.riwayat-table th { text-align: left; color: #9a8f7d; font-weight: 600; font-size: 10px; padding: 7px 8px; border-bottom: 2px solid #eee9df; white-space: nowrap; }
+table.riwayat-table td { padding: 8px 8px; border-bottom: 1px solid #f2ede2; white-space: nowrap; }
+table.riwayat-table tr:last-child td { border-bottom: none; }
+td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11px; white-space: normal; }
+.danger-btn { margin: 0 17px 16px; height: 34px; border-radius: 9px; border: 1px solid #f0c9c5; background: #fdf3f1; color: #b3261e; font-size: 11px; font-weight: 600; cursor: pointer; width: calc(100% - 34px); }
 
-.stock-label {
-  font-size: 12px;
-}
-
-.stock-label small {
-  display: block;
-  color: #aaa;
-  font-size: 9px;
-  margin-top: 2px;
-}
-
-.number-input {
-  width: 67px;
-  height: 31px;
-  border: 1px solid #dcd3c4;
-  border-radius: 8px;
-  text-align: center;
-  font-family: monospace;
-  font-weight: bold;
-  font-size: 14px;
+/* ========= BOTTOM NAV ========= */
+.bottomnav {
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 430px;
   background: #fff;
-}
-
-.stock-total {
-  margin-top: 10px;
-  padding: 11px 13px;
-  border-radius: 10px;
-  background: #29251f;
-  color: white;
+  border-top: 1px solid #eadfd1;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  box-shadow: 0 -4px 16px rgba(60,40,20,.08);
+  z-index: 10;
 }
+.navbtn { flex:1; border:none; background:none; padding: 10px 0 8px; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; color:#a89d89; font-size:10px; font-family:inherit; }
+.navbtn .nicon { font-size: 19px; }
+.navbtn.active { color: #d71920; }
 
-.stock-total label {
-  font-size: 10px;
-  color: #d9d3c8;
-}
-
-.stock-total strong {
-  font-family: monospace;
-  font-size: 18px;
-}
-
-.stock-actions {
-  display: flex;
-  gap: 7px;
-  padding: 0 17px 14px;
-}
-
-.stock-actions button {
-  flex: 1;
-  height: 32px;
-  border-radius: 8px;
-  font-size: 10px;
-  cursor: pointer;
-}
-
-.save {
-  background: #d71920;
-  color: white;
-  border: none;
-}
-
-.reset {
-  background: white;
-  border: 1px solid #dcd3c4;
-  color: #777;
-}
-
-.save-status {
-  text-align: center;
-  padding-bottom: 12px;
-  font-size: 10px;
-  color: #8a7f6c;
-}
-
-/* =========================
-   PENJUALAN
-========================= */
-
-.sale-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 13px 17px;
-  border-top: 1px solid #eee9df;
-}
-
-.sale-name {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.sale-name small {
-  display: block;
-  color: #999;
-  font-size: 10px;
-  font-weight: normal;
-  margin-top: 2px;
-}
-
-.stepper {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.stepper button {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid #ddd5c8;
-  background: white;
-  font-size: 17px;
-  cursor: pointer;
-}
-
-.stepper .plus {
-  background: #d71920;
-  border: none;
-  color: white;
-}
-
-.stepper input {
-  width: 40px;
-  border: none;
-  background: transparent;
-  text-align: center;
-  font-family: monospace;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.sale-total {
-  background: #29251f;
-  color: white;
-  padding: 15px 17px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sale-total span:first-child {
-  font-size: 11px;
-}
-
-.sale-total strong {
-  font-family: monospace;
-  font-size: 21px;
-}
-
-/* =========================
-   PENUSUKAN
-========================= */
-
-.penusukan {
-  padding: 14px 17px 16px;
-  background: #fff9e8;
-  border-top: 3px solid #ffc400;
-}
-
-.penusukan-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.penusukan-title {
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.penusukan-title small {
-  display: block;
-  color: #999;
-  font-weight: normal;
-  font-size: 10px;
-  margin-top: 2px;
-}
-
-.penusukan-input {
-  width: 72px;
-  height: 34px;
-  border: 1px solid #d8cfbf;
-  border-radius: 9px;
-  text-align: center;
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* =========================
-   SELISIH
-========================= */
-
-.difference {
-  margin-top: 12px;
-  padding: 13px 14px;
-  border-radius: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.difference-label {
-  font-size: 11px;
-  font-weight: bold;
-}
-
-.difference-desc {
-  font-size: 9px;
-  margin-top: 2px;
-  opacity: .7;
-}
-
-.difference-number {
-  font-family: monospace;
-  font-size: 19px;
-  font-weight: bold;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-  text-align: center;
-  padding: 8px 10px;
-  color: #9b8e7a;
-  font-size: 10px;
-}
-
-.footer b {
-  color: #d71920;
-}
-
+.footer { text-align: center; padding: 4px 10px 2px; color: #9b8e7a; font-size: 10px; }
+.footer b { color: #d71920; }
 </style>
 </head>
-
 <body>
 
 <div class="app">
 
-  <div class="banner">
-    <img src="ead401b9-7d28-45a7-9365-b2063f457d06_gobiz-dashboard-image_1745894990069.jpg" alt="Ayam Guling Enakko">
+  <!-- ======================= BERANDA ======================= -->
+  <div id="page-beranda" class="page active">
+    <div class="pagewrap">
+
+      <div class="banner">
+        <div class="b-emoji">🐔🔥</div>
+        <div class="b-text">
+          <div class="b-title">Ayam Guling Enakko</div>
+          <div class="b-sub" id="tanggal">Memuat tanggal...</div>
+        </div>
+      </div>
+
+      <div class="header">
+        <h1>Beranda</h1>
+        <p>Kalkulator penjualan &amp; ringkasan stock hari ini</p>
+      </div>
+
+      <div class="section-title">🧮 Penjualan Ayam <small>hitung & simpan transaksi hari ini</small></div>
+      <div class="card">
+        <div class="sale-row">
+          <div class="sale-name">Ekor Utuh<small>1 ekor</small></div>
+          <div class="stepper">
+            <button onclick="ubah('utuh', -1)">−</button>
+            <input id="utuh" type="number" min="0" value="0">
+            <button class="plus" onclick="ubah('utuh', 1)">+</button>
+          </div>
+        </div>
+        <div class="sale-row">
+          <div class="sale-name">Setengah<small>½ ekor</small></div>
+          <div class="stepper">
+            <button onclick="ubah('setengah', -1)">−</button>
+            <input id="setengah" type="number" min="0" value="0">
+            <button class="plus" onclick="ubah('setengah', 1)">+</button>
+          </div>
+        </div>
+        <div class="sale-row">
+          <div class="sale-name">Seperempat<small>¼ ekor</small></div>
+          <div class="stepper">
+            <button onclick="ubah('seperempat', -1)">−</button>
+            <input id="seperempat" type="number" min="0" value="0">
+            <button class="plus" onclick="ubah('seperempat', 1)">+</button>
+          </div>
+        </div>
+        <div class="sale-total">
+          <span>TOTAL PENJUALAN</span>
+          <strong id="totalPenjualan">0 ekor</strong>
+        </div>
+        <div class="penusukan">
+          <div class="penusukan-top">
+            <div class="penusukan-title">🔪 Ayam Penusukan<small>jumlah ayam yang benar-benar ditusuk</small></div>
+            <input id="penusukan" class="penusukan-input" type="number" min="0" step="0.25" value="0">
+          </div>
+          <div id="difference" class="difference">
+            <div>
+              <div id="differenceLabel" class="difference-label">SELISIH</div>
+              <div id="differenceDesc" class="difference-desc">Penjualan dibanding penusukan</div>
+            </div>
+            <div id="differenceNumber" class="difference-number">0 ekor</div>
+          </div>
+        </div>
+        <button class="sale-save" onclick="simpanPenjualan()">💾 Simpan Penjualan Hari Ini</button>
+        <div id="salesSaveStatus" class="save-status"></div>
+      </div>
+
+      <div class="section-title">📊 Diagram Stock Barang <small>posisi stock terkini semua item</small></div>
+      <div class="card chart-card">
+        <div class="chart-wrap"><canvas id="stockChart"></canvas></div>
+        <div class="legend-list" id="legendList"></div>
+      </div>
+
+    </div>
   </div>
 
+  <!-- ======================= STOCK ======================= -->
+  <div id="page-stock" class="page">
+    <div class="pagewrap">
+      <div class="header">
+        <h1>Stock Barang</h1>
+        <p>Catat stok fisik tiap item</p>
+      </div>
 
-  <div class="header">
-    <h1>Ayam Guling Enakko</h1>
-    <p id="tanggal">Memuat tanggal...</p>
+      <div id="stockCards"></div>
+
+      <div class="stock-actions">
+        <button class="save" onclick="simpanSemuaStock()">💾 Simpan Semua Stock</button>
+        <button class="reset" onclick="resetSemuaStock()">Reset</button>
+      </div>
+      <div id="stockSaveStatus" class="save-status"></div>
+    </div>
   </div>
 
-
-  <div class="card">
-
-    <div class="card-head">
-      <div class="icon">🐔</div>
-      <div>
-        <h2>Stock Ayam</h2>
-        <span>Catatan ayam fisik</span>
+  <!-- ======================= RIWAYAT ======================= -->
+  <div id="page-riwayat" class="page">
+    <div class="pagewrap">
+      <div class="header">
+        <h1>Riwayat</h1>
+        <p>Data penjualan &amp; stock yang sudah disimpan</p>
       </div>
-    </div>
 
-    <div class="stock-body">
-
-      <div class="stock-line">
-        <div class="stock-label">
-          Stok Awal
-          <small>ayam fisik awal</small>
+      <div class="card">
+        <div class="riwayat-head"><h2>🧮 Riwayat Penjualan Ayam</h2></div>
+        <div class="table-scroll">
+          <table class="riwayat-table">
+            <thead><tr>
+              <th>Tanggal</th><th>Utuh</th><th>½</th><th>¼</th><th>Total</th><th>Tusuk</th><th>Selisih</th>
+            </tr></thead>
+            <tbody id="tbodyPenjualan"></tbody>
+          </table>
         </div>
-        <input id="stokAwal" class="number-input" type="number" min="0" step="0.25" value="0">
+        <button class="danger-btn" id="btnHapusPenjualan" onclick="hapusRiwayatPenjualan(this)">🗑️ Hapus Riwayat Penjualan</button>
       </div>
 
-      <div class="stock-line">
-        <div class="stock-label">
-          Ayam Masuk
-          <small>tambahan ayam</small>
+      <div class="card">
+        <div class="riwayat-head">
+          <h2>📦 Riwayat Stock Barang</h2>
+          <select class="filter-select" id="filterItem" onchange="renderRiwayat()"></select>
         </div>
-        <input id="masuk" class="number-input" type="number" min="0" step="0.25" value="0">
-      </div>
-
-      <div class="stock-line">
-        <div class="stock-label">
-          Stok Akhir (Fisik)
-          <small>sisa ayam di tempat</small>
+        <div class="table-scroll">
+          <table class="riwayat-table">
+            <thead><tr>
+              <th>Tanggal</th><th>Item</th><th>Awal</th><th>Masuk</th><th>Akhir</th><th>Terpakai</th>
+            </tr></thead>
+            <tbody id="tbodyStock"></tbody>
+          </table>
         </div>
-        <input id="stokAkhir" class="number-input" type="number" min="0" step="0.25" value="0">
+        <button class="danger-btn" id="btnHapusStock" onclick="hapusRiwayatStock(this)">🗑️ Hapus Riwayat Stock</button>
       </div>
 
-      <div class="stock-total">
-        <label>AYAM KELUAR (TERPAKAI)</label>
-        <strong id="stokFisik">0 ekor</strong>
-      </div>
-
+      <div class="footer"><b>Ayam Guling Enakko</b><br>Sistem pencatatan stock &amp; penjualan</div>
     </div>
-
-    <div class="stock-actions">
-      <button class="save" onclick="simpanStock()">💾 Simpan</button>
-      <button class="reset" onclick="resetStock()">Reset</button>
-    </div>
-
-    <div id="saveStatus" class="save-status"></div>
-
   </div>
 
-
-  <div class="card">
-
-    <div class="card-head">
-      <div class="icon">🧮</div>
-      <div>
-        <h2>Penjualan</h2>
-        <span>Kalkulator jumlah ayam terjual</span>
-      </div>
-    </div>
-
-    <div class="sale-row">
-      <div class="sale-name">
-        Ekor Utuh
-        <small>1 ekor</small>
-      </div>
-      <div class="stepper">
-        <button onclick="ubah('utuh', -1)">−</button>
-        <input id="utuh" type="number" min="0" value="0">
-        <button class="plus" onclick="ubah('utuh', 1)">+</button>
-      </div>
-    </div>
-
-    <div class="sale-row">
-      <div class="sale-name">
-        Setengah
-        <small>½ ekor</small>
-      </div>
-      <div class="stepper">
-        <button onclick="ubah('setengah', -1)">−</button>
-        <input id="setengah" type="number" min="0" value="0">
-        <button class="plus" onclick="ubah('setengah', 1)">+</button>
-      </div>
-    </div>
-
-    <div class="sale-row">
-      <div class="sale-name">
-        Seperempat
-        <small>¼ ekor</small>
-      </div>
-      <div class="stepper">
-        <button onclick="ubah('seperempat', -1)">−</button>
-        <input id="seperempat" type="number" min="0" value="0">
-        <button class="plus" onclick="ubah('seperempat', 1)">+</button>
-      </div>
-    </div>
-
-    <div class="sale-total">
-      <span>TOTAL PENJUALAN</span>
-      <strong id="totalPenjualan">0 ekor</strong>
-    </div>
-
-    <div class="penusukan">
-      <div class="penusukan-top">
-        <div class="penusukan-title">
-          🔪 Ayam Penusukan
-          <small>jumlah ayam yang benar-benar ditusuk</small>
-        </div>
-        <input id="penusukan" class="penusukan-input" type="number" min="0" step="0.25" value="0">
-      </div>
-
-      <div id="difference" class="difference">
-        <div>
-          <div id="differenceLabel" class="difference-label">SELISIH</div>
-          <div id="differenceDesc" class="difference-desc">Penjualan dibanding penusukan</div>
-        </div>
-        <div id="differenceNumber" class="difference-number">0 ekor</div>
-      </div>
-    </div>
-
-  </div>
-
-
-  <div class="footer">
-    <b>Ayam Guling Enakko</b><br>
-    Sistem pencatatan stock & penjualan
-  </div>
+  <nav class="bottomnav">
+    <button class="navbtn active" data-page="beranda" onclick="gotoPage('beranda')"><span class="nicon">🏠</span>Beranda</button>
+    <button class="navbtn" data-page="stock" onclick="gotoPage('stock')"><span class="nicon">📦</span>Stock</button>
+    <button class="navbtn" data-page="riwayat" onclick="gotoPage('riwayat')"><span class="nicon">🕒</span>Riwayat</button>
+  </nav>
 
 </div>
 
-
 <script>
+/* =========================
+   KONFIGURASI ITEM STOCK
+========================= */
+const STOCK_ITEMS = [
+  { id:'ayam',           nama:'Ayam',              unit:'ekor',  icon:'🐔', color:'#d71920' },
+  { id:'berasPutih',     nama:'Beras Putih',       unit:'kg',    icon:'🍚', color:'#c9a227' },
+  { id:'berasBasmati',   nama:'Beras Basmati',     unit:'kg',    icon:'🌾', color:'#8a6d3b' },
+  { id:'oli',            nama:'Oli',                unit:'liter', icon:'🛢️', color:'#3f6b4a' },
+  { id:'airMineral',     nama:'Air Mineral',       unit:'botol', icon:'💧', color:'#2f7d9e' },
+  { id:'tehBotolSosro',  nama:'Teh Botol Sosro',   unit:'botol', icon:'🍵', color:'#a35b1f' },
+];
+
+let stockState = {};
+let riwayatStock = [];
+let riwayatPenjualan = [];
+let stockChartInstance = null;
+let confirmDeleteP = false;
+let confirmDeleteS = false;
 
 /* =========================
-   ANGKA
+   STORAGE HELPERS
 ========================= */
-
-function angka(id) {
-  return Number(document.getElementById(id).value) || 0;
+async function loadJSON(key, fallback) {
+  try {
+    const r = await window.storage.get(key, false);
+    if (!r || !r.value) return fallback;
+    return JSON.parse(r.value);
+  } catch (e) { return fallback; }
+}
+async function saveJSON(key, value) {
+  try { await window.storage.set(key, JSON.stringify(value), false); }
+  catch (e) { console.error('Gagal menyimpan', key, e); }
 }
 
-
 /* =========================
-   FORMAT ANGKA
+   UTIL
 ========================= */
+function angka(id) { return Number(document.getElementById(id).value) || 0; }
 
 function format(n) {
   var hasil = Math.round(n * 100) / 100;
+  if (Number.isInteger(hasil)) return hasil.toString();
+  return hasil.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+}
 
-  if (Number.isInteger(hasil)) {
-    return hasil.toString();
+function formatTanggalPendek(d) {
+  var bulan = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+  var jam = String(d.getHours()).padStart(2,'0');
+  var menit = String(d.getMinutes()).padStart(2,'0');
+  return d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear() + ", " + jam + ":" + menit;
+}
+
+function tampilTanggal() {
+  var hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+  var bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+  var d = new Date();
+  document.getElementById("tanggal").textContent =
+    hari[d.getDay()] + ", " + d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear();
+}
+
+/* =========================
+   NAVIGASI
+========================= */
+function gotoPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  if (name === 'beranda' && stockChartInstance) {
+    setTimeout(() => stockChartInstance.resize(), 50);
   }
-
-  return hasil
-    .toFixed(2)
-    .replace(/0+$/, "")
-    .replace(/\.$/, "");
 }
 
-
 /* =========================
-   STOCK
+   PENJUALAN AYAM (BERANDA)
 ========================= */
-
-function hitungStock() {
-  var awal = angka("stokAwal");
-  var masuk = angka("masuk");
-  var akhir = angka("stokAkhir");
-
-  /*
-    RUMUS KELUAR:
-    (Stok Awal + Masuk) - Stok Akhir
-  */
-  var keluar = (awal + masuk) - akhir;
-  if (keluar < 0) keluar = 0;
-
-  document.getElementById("stokFisik").textContent = format(keluar) + " ekor";
+function ubah(id, nilai) {
+  var input = document.getElementById(id);
+  var hasil = Number(input.value) + nilai;
+  if (hasil < 0) hasil = 0;
+  input.value = hasil;
+  hitungPenjualan();
 }
-
-
-/* =========================
-   PENJUALAN
-========================= */
 
 function hitungPenjualan() {
   var utuh = angka("utuh");
   var setengah = angka("setengah");
   var seperempat = angka("seperempat");
-
   var penjualan = utuh + (setengah * 0.5) + (seperempat * 0.25);
-
   document.getElementById("totalPenjualan").textContent = format(penjualan) + " ekor";
 
-  /* PENUSUKAN */
   var penusukan = angka("penusukan");
-
-  /* RUMUS SELISIH: PENJUALAN - PENUSUKAN */
   var selisih = penjualan - penusukan;
 
   var box = document.getElementById("difference");
@@ -601,155 +397,283 @@ function hitungPenjualan() {
   var desc = document.getElementById("differenceDesc");
   var number = document.getElementById("differenceNumber");
 
-  /* KURANG */
   if (selisih < -0.001) {
-    box.style.background = "#f8e6e0";
-    label.style.color = "#b3261e";
-    number.style.color = "#b3261e";
-    label.textContent = "KURANG";
-    desc.textContent = "Penusukan lebih banyak";
+    box.style.background = "#f8e6e0"; label.style.color = "#b3261e"; number.style.color = "#b3261e";
+    label.textContent = "KURANG"; desc.textContent = "Penusukan lebih banyak";
     number.textContent = format(selisih) + " ekor";
-  }
-  /* LEBIH */
-  else if (selisih > 0.001) {
-    box.style.background = "#fff0c7";
-    label.style.color = "#a36b00";
-    number.style.color = "#a36b00";
-    label.textContent = "LEBIH";
-    desc.textContent = "Penjualan lebih banyak";
+  } else if (selisih > 0.001) {
+    box.style.background = "#fff0c7"; label.style.color = "#a36b00"; number.style.color = "#a36b00";
+    label.textContent = "LEBIH"; desc.textContent = "Penjualan lebih banyak";
     number.textContent = "+" + format(selisih) + " ekor";
-  }
-  /* PAS */
-  else {
-    box.style.background = "#e8f3e9";
-    label.style.color = "#3f6b4a";
-    number.style.color = "#3f6b4a";
-    label.textContent = "PAS";
-    desc.textContent = "Penjualan dan penusukan sama";
+  } else {
+    box.style.background = "#e8f3e9"; label.style.color = "#3f6b4a"; number.style.color = "#3f6b4a";
+    label.textContent = "PAS"; desc.textContent = "Penjualan dan penusukan sama";
     number.textContent = "0 ekor";
   }
 }
 
+async function simpanPenjualan() {
+  var utuh = angka("utuh"), setengah = angka("setengah"), seperempat = angka("seperempat");
+  var total = utuh + setengah * 0.5 + seperempat * 0.25;
+  var penusukan = angka("penusukan");
+  var selisih = total - penusukan;
+  var tanggal = new Date();
 
-/* =========================
-   STEPPER
-========================= */
+  riwayatPenjualan.unshift({
+    tanggalLabel: formatTanggalPendek(tanggal),
+    utuh: utuh, setengah: setengah, seperempat: seperempat,
+    total: total, penusukan: penusukan, selisih: selisih
+  });
 
-function ubah(id, nilai) {
-  var input = document.getElementById(id);
-  var hasil = Number(input.value) + nilai;
-
-  if (hasil < 0) hasil = 0;
-
-  input.value = hasil;
-  hitungPenjualan();
+  await saveJSON('riwayat-penjualan', riwayatPenjualan);
+  document.getElementById('salesSaveStatus').textContent = '✓ Penjualan tersimpan · ' + formatTanggalPendek(tanggal);
+  renderRiwayat();
 }
 
-
 /* =========================
-   SIMPAN STOCK
+   STOCK (HALAMAN STOCK)
 ========================= */
+function renderStockInputs() {
+  var container = document.getElementById('stockCards');
+  container.innerHTML = STOCK_ITEMS.map(function (item) {
+    var s = stockState[item.id];
+    return '<div class="card">' +
+      '<div class="card-head"><div class="icon" style="background:' + item.color + '22">' + item.icon + '</div>' +
+      '<div><h2>' + item.nama + '</h2><span>Satuan: ' + item.unit + '</span></div></div>' +
+      '<div class="stock-body">' +
+        '<div class="stock-line"><div class="stock-label">Stok Awal<br><small style="color:#aaa;font-size:9px;">ayam/barang fisik awal</small></div>' +
+          '<input class="number-input" data-item="' + item.id + '" data-field="awal" type="number" min="0" step="0.5" value="' + s.awal + '"></div>' +
+        '<div class="stock-line"><div class="stock-label">Masuk<br><small style="color:#aaa;font-size:9px;">tambahan barang</small></div>' +
+          '<input class="number-input" data-item="' + item.id + '" data-field="masuk" type="number" min="0" step="0.5" value="' + s.masuk + '"></div>' +
+        '<div class="stock-line"><div class="stock-label">Stok Akhir<br><small style="color:#aaa;font-size:9px;">sisa fisik saat ini</small></div>' +
+          '<input class="number-input akhir-input" data-item="' + item.id + '" data-field="akhir" type="number" step="0.5" value="' + s.akhir + '"></div>' +
+        '<div class="stock-total" style="background:' + item.color + '"><label>TERPAKAI</label>' +
+          '<div class="stock-total-input-wrap">' +
+            '<input class="stock-total-input" id="keluar-' + item.id + '" data-item="' + item.id + '" type="number" step="0.1" value="' + s.keluar + '">' +
+            '<span class="stock-unit-label">' + item.unit + '</span>' +
+          '</div></div>' +
+      '</div></div>';
+  }).join('');
 
-function simpanStock() {
-  var data = {
-    tanggal: new Date().toISOString(),
-    stokAwal: angka("stokAwal"),
-    masuk: angka("masuk"),
-    stokAkhir: angka("stokAkhir")
-  };
+  // Jika ubah Awal, Masuk, atau Akhir -> otomatis ubah Terpakai
+  container.querySelectorAll('input.number-input').forEach(function (inp) {
+    inp.addEventListener('input', function (e) {
+      var id = e.target.dataset.item;
+      var field = e.target.dataset.field;
+      var s = stockState[id];
 
-  localStorage.setItem("stockAyam", JSON.stringify(data));
-  document.getElementById("saveStatus").textContent = "✓ Stock ayam tersimpan";
+      s[field] = Number(e.target.value) || 0;
+      
+      s.keluar = (s.awal + s.masuk) - s.akhir;
+      var inputKeluar = document.getElementById('keluar-' + id);
+      if (inputKeluar) inputKeluar.value = s.keluar;
+
+      renderChart();
+    });
+  });
+
+  // Jika ubah Terpakai -> otomatis ubah Akhir
+  container.querySelectorAll('input.stock-total-input').forEach(function (inp) {
+    inp.addEventListener('input', function (e) {
+      var id = e.target.dataset.item;
+      var s = stockState[id];
+
+      s.keluar = Number(e.target.value) || 0;
+      
+      s.akhir = (s.awal + s.masuk) - s.keluar;
+      var inputAkhir = document.querySelector('input[data-item="' + id + '"][data-field="akhir"]');
+      if (inputAkhir) inputAkhir.value = s.akhir;
+
+      renderChart();
+    });
+  });
 }
 
+async function simpanSemuaStock() {
+  var tanggal = new Date();
+  STOCK_ITEMS.forEach(function (item) {
+    var s = stockState[item.id];
+    s.tanggal = tanggal.toDateString();
+    riwayatStock.unshift({
+      tanggalLabel: formatTanggalPendek(tanggal),
+      itemId: item.id, nama: item.nama, unit: item.unit,
+      awal: s.awal, masuk: s.masuk, akhir: s.akhir, keluar: s.keluar
+    });
+  });
+  await saveJSON('stock-state', stockState);
+  await saveJSON('riwayat-stock', riwayatStock);
+  document.getElementById('stockSaveStatus').textContent = '✓ Semua stock tersimpan · ' + formatTanggalPendek(tanggal);
+  renderRiwayat();
+  renderChart();
+}
+
+function resetSemuaStock() {
+  var tanggal = new Date().toDateString();
+  STOCK_ITEMS.forEach(function (item) {
+    stockState[item.id] = { awal: 0, masuk: 0, akhir: 0, keluar: 0, tanggal: tanggal };
+  });
+  renderStockInputs();
+  document.getElementById('stockSaveStatus').textContent = '';
+  renderChart();
+}
 
 /* =========================
-   LOAD STOCK
+   DIAGRAM STOCK (BERANDA)
 ========================= */
+function renderChart() {
+  var canvas = document.getElementById('stockChart');
+  if (!canvas || typeof Chart === 'undefined') return;
 
-function loadStock() {
-  var data = localStorage.getItem("stockAyam");
-  if (!data) return;
+  var labels = STOCK_ITEMS.map(function (i) { return i.icon + ' ' + i.nama; });
+  var data = STOCK_ITEMS.map(function (i) {
+    var s = stockState[i.id];
+    return s.akhir; // Di grafik akan selalu menampikan sisa / stok akhir
+  });
+  var colors = STOCK_ITEMS.map(function (i) { return i.color; });
 
-  try {
-    var hasil = JSON.parse(data);
-    var tanggalSimpan = new Date(hasil.tanggal);
-    var sekarang = new Date();
+  if (stockChartInstance) {
+    stockChartInstance.data.labels = labels;
+    stockChartInstance.data.datasets[0].data = data;
+    stockChartInstance.data.datasets[0].backgroundColor = colors;
+    stockChartInstance.update();
+  } else {
+    stockChartInstance = new Chart(canvas, {
+      type: 'bar',
+      data: { labels: labels, datasets: [{ label: 'Stok saat ini', data: data, backgroundColor: colors, borderRadius: 8, maxBarThickness: 22 }] },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: function (ctx) {
+            var item = STOCK_ITEMS[ctx.dataIndex];
+            return format(ctx.raw) + ' ' + item.unit;
+          } } }
+        },
+        scales: {
+          x: { beginAtZero: true, grid: { color: '#eee9df' }, ticks: { font: { size: 10 } } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
 
-    if (tanggalSimpan.toDateString() !== sekarang.toDateString()) {
-      // Jika hari berganti, Stok Akhir kemarin otomatis jadi Stok Awal hari ini
-      document.getElementById("stokAwal").value = hasil.stokAkhir || 0;
-      document.getElementById("masuk").value = 0;
-      document.getElementById("stokAkhir").value = 0;
-      hitungStock();
-    } else {
-      document.getElementById("stokAwal").value = hasil.stokAwal || 0;
-      document.getElementById("masuk").value = hasil.masuk || 0;
-      document.getElementById("stokAkhir").value = hasil.stokAkhir || 0;
-      hitungStock();
-    }
-  } catch (error) {
-    console.log("Data stock tidak terbaca.");
+  var legend = document.getElementById('legendList');
+  legend.innerHTML = STOCK_ITEMS.map(function (item, idx) {
+    return '<div class="legend-row"><div class="legend-dot" style="background:' + item.color + '"></div>' +
+      '<div class="legend-name">' + item.nama + '</div>' +
+      '<div class="legend-val">' + format(data[idx]) + ' ' + item.unit + '</div></div>';
+  }).join('');
+}
+
+/* =========================
+   RIWAYAT
+========================= */
+function isiFilterItem() {
+  var select = document.getElementById('filterItem');
+  var opsi = '<option value="all">Semua item</option>' +
+    STOCK_ITEMS.map(function (i) { return '<option value="' + i.id + '">' + i.icon + ' ' + i.nama + '</option>'; }).join('');
+  select.innerHTML = opsi;
+}
+
+function renderRiwayat() {
+  var tbodyP = document.getElementById('tbodyPenjualan');
+  if (riwayatPenjualan.length === 0) {
+    tbodyP.innerHTML = '<tr><td colspan="7" class="empty">Belum ada riwayat penjualan</td></tr>';
+  } else {
+    tbodyP.innerHTML = riwayatPenjualan.map(function (r) {
+      var warna = r.selisih < 0 ? '#b3261e' : (r.selisih > 0 ? '#a36b00' : '#3f6b4a');
+      var tanda = r.selisih > 0 ? '+' : '';
+      return '<tr><td>' + r.tanggalLabel + '</td><td>' + format(r.utuh) + '</td><td>' + format(r.setengah) + '</td>' +
+        '<td>' + format(r.seperempat) + '</td><td><b>' + format(r.total) + '</b></td><td>' + format(r.penusukan) + '</td>' +
+        '<td style="color:' + warna + '">' + tanda + format(r.selisih) + '</td></tr>';
+    }).join('');
+  }
+
+  var filterVal = document.getElementById('filterItem').value || 'all';
+  var tbodyS = document.getElementById('tbodyStock');
+  var rows = riwayatStock.filter(function (r) { return filterVal === 'all' || r.itemId === filterVal; });
+  if (rows.length === 0) {
+    tbodyS.innerHTML = '<tr><td colspan="6" class="empty">Belum ada riwayat stock</td></tr>';
+  } else {
+    tbodyS.innerHTML = rows.map(function (r) {
+      var itemCfg = STOCK_ITEMS.find(function (i) { return i.id === r.itemId; });
+      var icon = itemCfg ? itemCfg.icon : '';
+      return '<tr><td>' + r.tanggalLabel + '</td><td>' + icon + ' ' + r.nama + '</td>' +
+        '<td>' + format(r.awal) + '</td><td>' + format(r.masuk) + '</td><td>' + format(r.akhir) + '</td>' +
+        '<td><b>' + format(r.keluar) + ' ' + r.unit + '</b></td></tr>';
+    }).join('');
   }
 }
 
-
-/* =========================
-   RESET STOCK
-========================= */
-
-function resetStock() {
-  document.getElementById("stokAwal").value = 0;
-  document.getElementById("masuk").value = 0;
-  document.getElementById("stokAkhir").value = 0;
-  document.getElementById("saveStatus").textContent = "";
-  hitungStock();
+function hapusRiwayatPenjualan(btn) {
+  if (!confirmDeleteP) {
+    confirmDeleteP = true;
+    btn.textContent = 'Yakin hapus? Klik lagi';
+    setTimeout(function () { confirmDeleteP = false; btn.textContent = '🗑️ Hapus Riwayat Penjualan'; }, 3000);
+    return;
+  }
+  riwayatPenjualan = [];
+  saveJSON('riwayat-penjualan', riwayatPenjualan);
+  confirmDeleteP = false;
+  btn.textContent = '🗑️ Hapus Riwayat Penjualan';
+  renderRiwayat();
 }
 
-
-/* =========================
-   TANGGAL
-========================= */
-
-function tampilTanggal() {
-  var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-  var bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-  var d = new Date();
-
-  document.getElementById("tanggal").textContent =
-    hari[d.getDay()] + ", " + d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear();
+function hapusRiwayatStock(btn) {
+  if (!confirmDeleteS) {
+    confirmDeleteS = true;
+    btn.textContent = 'Yakin hapus? Klik lagi';
+    setTimeout(function () { confirmDeleteS = false; btn.textContent = '🗑️ Hapus Riwayat Stock'; }, 3000);
+    return;
+  }
+  riwayatStock = [];
+  saveJSON('riwayat-stock', riwayatStock);
+  confirmDeleteS = false;
+  btn.textContent = '🗑️ Hapus Riwayat Stock';
+  renderRiwayat();
 }
 
-
 /* =========================
-   INPUT OTOMATIS
+   INPUT OTOMATIS PENJUALAN
 ========================= */
-
-document.querySelectorAll("input").forEach(function(input) {
-  input.addEventListener("input", function() {
-    if (
-      input.id === "stokAwal" ||
-      input.id === "masuk" ||
-      input.id === "stokAkhir"
-    ) {
-      hitungStock();
-    } else {
-      hitungPenjualan();
-    }
-  });
+document.querySelectorAll('#page-beranda input').forEach(function (input) {
+  input.addEventListener('input', hitungPenjualan);
 });
 
-
 /* =========================
-   START
+   INIT
 ========================= */
+async function init() {
+  tampilTanggal();
+  isiFilterItem();
 
-tampilTanggal();
-loadStock();
-hitungStock();
-hitungPenjualan();
+  var loadedState = await loadJSON('stock-state', {});
+  var todayStr = new Date().toDateString();
 
+  STOCK_ITEMS.forEach(function (item) {
+    var s = loadedState[item.id];
+    if (!s) {
+      stockState[item.id] = { awal: 0, masuk: 0, akhir: 0, keluar: 0, tanggal: todayStr };
+    } else if (s.tanggal !== todayStr) {
+      // hari berganti: stok akhir kemarin jadi stok awal hari ini
+      stockState[item.id] = { awal: s.akhir || 0, masuk: 0, akhir: 0, keluar: 0, tanggal: todayStr };
+    } else {
+      stockState[item.id] = s;
+    }
+  });
+
+  riwayatStock = await loadJSON('riwayat-stock', []);
+  riwayatPenjualan = await loadJSON('riwayat-penjualan', []);
+
+  renderStockInputs();
+  renderRiwayat();
+  renderChart();
+  hitungPenjualan();
+}
+
+init();
 </script>
-
 </body>
 </html>
