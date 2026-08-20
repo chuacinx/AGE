@@ -506,7 +506,6 @@ function hitungEkspresi(val) {
   var teks = String(val).trim().replace(/,/g, '.');
   if (!teks) return 0;
   
-  // Menguji ekspresi yang aman hanya berisi angka, titik, dan operator + - * /
   if (/^[0-9.+-/*\s]+$/.test(teks)) {
     try {
       var hasil = Function('"use strict"; return (' + teks + ')')();
@@ -700,6 +699,9 @@ function syncPenusukanDenganAyam() {
   }
 }
 
+/* =========================
+   EKSSEKUSI LANGSUNG STOK AKHIR KE STOK AWAL
+========================= */
 function simpanStockItem(itemId) {
   var item = STOCK_ITEMS.find(function (i) { return i.id === itemId; });
   if (!item) return;
@@ -708,14 +710,22 @@ function simpanStockItem(itemId) {
   var d = new Date();
   s.tanggal = d.toDateString();
 
+  // 1. Simpan data hari ini ke Matrix
   updateSingleDayMatrix(d.getFullYear(), d.getMonth() + 1, d.getDate(), itemId, s.awal, s.masuk, s.keluar, s.akhir, s.keterangan);
+
+  // 2. Eksekusi langsung Stok Akhir menjadi Stok Awal baru di form input
+  s.awal = s.akhir;
+  s.masuk = 0;
+  s.keluar = 0;
+  s.keterangan = '';
 
   saveJSON('stock-state', stockState);
   syncPenusukanDenganAyam();
+  renderStockInputs();
   renderExcelMatrix();
   
   document.getElementById('stockSaveStatus').textContent =
-    '✓ ' + item.nama + ' tersimpan di Matrix · ' + formatTanggalPendek(d);
+    '✓ ' + item.nama + ' tersimpan & dieksekusi jadi Stok Awal baru · ' + formatTanggalPendek(d);
   renderChart();
 }
 
@@ -724,13 +734,23 @@ function simpanSemuaStock() {
   STOCK_ITEMS.forEach(function (item) {
     var s = stockState[item.id];
     s.tanggal = d.toDateString();
+    
+    // 1. Simpan data hari ini ke Matrix
     updateSingleDayMatrix(d.getFullYear(), d.getMonth() + 1, d.getDate(), item.id, s.awal, s.masuk, s.keluar, s.akhir, s.keterangan);
+    
+    // 2. Eksekusi langsung Stok Akhir menjadi Stok Awal baru di form input
+    s.awal = s.akhir;
+    s.masuk = 0;
+    s.keluar = 0;
+    s.keterangan = '';
   });
+
   saveJSON('stock-state', stockState);
   syncPenusukanDenganAyam();
+  renderStockInputs();
   renderExcelMatrix();
   
-  document.getElementById('stockSaveStatus').textContent = '✓ Semua stock tersimpan di Matrix · ' + formatTanggalPendek(d);
+  document.getElementById('stockSaveStatus').textContent = '✓ Semua stock tersimpan & dieksekusi jadi Stok Awal baru · ' + formatTanggalPendek(d);
   renderChart();
 }
 
@@ -838,7 +858,6 @@ function getKeyYearMonth(year, month) {
   return `${year}-${String(month).padStart(2, '0')}`;
 }
 
-// LOGIKA UTAMA: Rekalkulasi Berantai & Sinkronisasi Stok Akhir Ke Stok Awal
 function recalculateChain(year, month, itemId) {
   const key = getKeyYearMonth(year, month);
   if (!excelMatrixData[key]) excelMatrixData[key] = {};
@@ -851,7 +870,6 @@ function recalculateChain(year, month, itemId) {
       itemData[d] = { awal: '', masuk: '', keluar: '', akhir: '', isManualAwal: false, isManualAkhir: false, ket: '' };
     }
 
-    // Sambung berantai: Stok Awal hari ini = Stok Akhir kemarin (jika tanggal ini tidak di-input manual)
     if (d > 1) {
       if (!itemData[d].isManualAwal) {
         let prevAkhir = itemData[d - 1].akhir !== '' ? Number(itemData[d - 1].akhir) : 0;
@@ -865,38 +883,12 @@ function recalculateChain(year, month, itemId) {
     const masuk = itemData[d].masuk !== '' ? Number(itemData[d].masuk) : 0;
     const keluar = itemData[d].keluar !== '' ? Number(itemData[d].keluar) : 0;
 
-    // Hitung stok akhir otomatis bila tidak di-override manual
     if (!itemData[d].isManualAkhir) {
       itemData[d].akhir = (awal + masuk) - keluar;
     }
   }
 
   saveJSON('excel-matrix-data', excelMatrixData);
-
-  // Sync Ke Stock State Penginputan Hari Ini
-  const now = new Date();
-  if (year === now.getFullYear() && month === (now.getMonth() + 1)) {
-    const todayNum = now.getDate();
-    const todayObj = itemData[todayNum];
-    const yesterdayObj = todayNum > 1 ? itemData[todayNum - 1] : null;
-
-    if (todayObj && stockState[itemId]) {
-      if (todayObj.isManualAwal) {
-        stockState[itemId].awal = Number(todayObj.awal) || 0;
-      } else if (yesterdayObj && yesterdayObj.akhir !== '') {
-        stockState[itemId].awal = Number(yesterdayObj.akhir) || 0;
-      } else {
-        stockState[itemId].awal = Number(todayObj.awal) || 0;
-      }
-
-      stockState[itemId].masuk = todayObj.masuk !== '' ? Number(todayObj.masuk) : 0;
-      stockState[itemId].keluar = todayObj.keluar !== '' ? Number(todayObj.keluar) : 0;
-      stockState[itemId].akhir = todayObj.akhir !== '' ? Number(todayObj.akhir) : 0;
-      stockState[itemId].keterangan = todayObj.ket || '';
-      
-      saveJSON('stock-state', stockState);
-    }
-  }
 }
 
 function updateSingleDayMatrix(year, month, day, itemId, awal, masuk, keluar, akhir, ket) {
@@ -1115,7 +1107,6 @@ function init() {
   excelMatrixData = loadJSON('excel-matrix-data', {});
   riwayatPenjualan = loadJSON('riwayat-penjualan', []);
 
-  // Hitung ulang berantai untuk seluruh item pada startup
   var now = new Date();
   STOCK_ITEMS.forEach(function(item) {
     recalculateChain(now.getFullYear(), now.getMonth() + 1, item.id);
