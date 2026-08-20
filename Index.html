@@ -131,6 +131,10 @@ body {
 .sale-total { background: #29251f; color: white; padding: 15px 17px; display: flex; justify-content: space-between; align-items: center; }
 .sale-total span:first-child { font-size: 11px; }
 .sale-total strong { font-family: monospace; font-size: 21px; }
+.sale-note { padding: 11px 17px 12px; border-top: 1px solid #eee9df; }
+.sale-note label { display:block; margin-bottom:5px; font-size:10px; color:#8a7f6c; font-weight:600; }
+.sale-note input { width:100%; box-sizing:border-box; height:36px; border:1px solid #ddd5c8; border-radius:9px; padding:0 10px; font-family:inherit; font-size:12px; background:#fff; color:#29251f; outline:none; }
+.sale-note input:focus { border-color:#d71920; }
 
 .penusukan { padding: 14px 17px 16px; background: #fff9e8; border-top: 3px solid #ffc400; }
 .penusukan-top { display: flex; justify-content: space-between; align-items: center; }
@@ -257,6 +261,10 @@ td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11p
             <div id="differenceNumber" class="difference-number">0 ekor</div>
           </div>
         </div>
+        <div class="sale-note">
+          <label for="salesNote">Keterangan Penjualan</label>
+          <input id="salesNote" class="note-input" type="text" maxlength="200" placeholder="Keterangan penjualan hari ini (opsional)">
+        </div>
         <button class="sale-save" onclick="simpanPenjualan()">💾 Simpan Penjualan Hari Ini</button>
         <div id="salesSaveStatus" class="save-status"></div>
       </div>
@@ -301,7 +309,7 @@ td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11p
         <div class="table-scroll">
           <table class="riwayat-table">
             <thead><tr>
-              <th>Tanggal</th><th>Utuh</th><th>½</th><th>¼</th><th>Total</th><th>Tusuk</th><th>Selisih</th>
+              <th>Tanggal</th><th>Utuh</th><th>½</th><th>¼</th><th>Total</th><th>Tusuk</th><th>Selisih</th><th>Keterangan</th>
             </tr></thead>
             <tbody id="tbodyPenjualan"></tbody>
           </table>
@@ -492,15 +500,18 @@ function simpanPenjualan() {
   var penusukan = angka("penusukan");
   var selisih = total - penusukan;
   var tanggal = new Date();
+  var keterangan = (document.getElementById("salesNote").value || "").trim();
 
   riwayatPenjualan.unshift({
     tanggalLabel: formatTanggalPendek(tanggal),
     utuh: utuh, setengah: setengah, seperempat: seperempat,
-    total: total, penusukan: penusukan, selisih: selisih
+    total: total, penusukan: penusukan, selisih: selisih,
+    keterangan: keterangan
   });
 
   saveJSON('riwayat-penjualan', riwayatPenjualan);
   document.getElementById('salesSaveStatus').textContent = '✓ Penjualan tersimpan · ' + formatTanggalPendek(tanggal);
+  document.getElementById('salesNote').value = '';
   renderRiwayat();
 }
 
@@ -679,14 +690,15 @@ function isiFilterItem() {
 function renderRiwayat() {
   var tbodyP = document.getElementById('tbodyPenjualan');
   if (riwayatPenjualan.length === 0) {
-    tbodyP.innerHTML = '<tr><td colspan="7" class="empty">Belum ada riwayat penjualan</td></tr>';
+    tbodyP.innerHTML = '<tr><td colspan="8" class="empty">Belum ada riwayat penjualan</td></tr>';
   } else {
     tbodyP.innerHTML = riwayatPenjualan.map(function (r) {
       var warna = r.selisih < 0 ? '#b3261e' : (r.selisih > 0 ? '#a36b00' : '#3f6b4a');
       var tanda = r.selisih > 0 ? '+' : '';
       return '<tr><td>' + r.tanggalLabel + '</td><td>' + format(r.utuh) + '</td><td>' + format(r.setengah) + '</td>' +
         '<td>' + format(r.seperempat) + '</td><td><b>' + format(r.total) + '</b></td><td>' + format(r.penusukan) + '</td>' +
-        '<td style="color:' + warna + '">' + tanda + format(r.selisih) + '</td></tr>';
+        '<td style="color:' + warna + '">' + tanda + format(r.selisih) + '</td><td>' +
+        (r.keterangan ? escapeHTML(r.keterangan) : '<span style="color:#aaa">—</span>') + '</td></tr>';
     }).join('');
   }
 
