@@ -164,6 +164,8 @@ table.riwayat-table th { text-align: left; color: #9a8f7d; font-weight: 600; fon
 table.riwayat-table td { padding: 8px 8px; border-bottom: 1px solid #f2ede2; white-space: nowrap; }
 table.riwayat-table tr:last-child td { border-bottom: none; }
 td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11px; white-space: normal; }
+.note-input { width:100%; height:34px; border:1px solid #dcd3c4; border-radius:9px; padding:0 10px; font-size:11px; font-family:inherit; margin-top:8px; background:#fff; }
+.row-delete { height:28px; min-width:56px; padding:0 8px; border-radius:7px; border:1px solid #f0c9c5; background:#fdf3f1; color:#b3261e; font-size:10px; font-weight:600; cursor:pointer; }
 .danger-btn { margin: 0 17px 16px; height: 34px; border-radius: 9px; border: 1px solid #f0c9c5; background: #fdf3f1; color: #b3261e; font-size: 11px; font-weight: 600; cursor: pointer; width: calc(100% - 34px); }
 
 /* ========= BOTTOM NAV ========= */
@@ -244,7 +246,7 @@ td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11p
         </div>
         <div class="penusukan">
           <div class="penusukan-top">
-            <div class="penusukan-title">🔪 Ayam Penusukan<small>jumlah ayam yang ditusuk,sisa malam dan sisa hari ini</small></div>
+            <div class="penusukan-title">🔪 Ayam Penusukan<small>otomatis dari ayam terpakai di Stock Barang</small></div>
             <input id="penusukan" class="penusukan-input" type="number" min="0" step="0.25" value="0">
           </div>
           <div id="difference" class="difference">
@@ -315,7 +317,7 @@ td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11p
         <div class="table-scroll">
           <table class="riwayat-table">
             <thead><tr>
-              <th>Tanggal</th><th>Item</th><th>Awal</th><th>Masuk</th><th>Akhir</th><th>Terpakai</th>
+              <th>Tanggal</th><th>Item</th><th>Awal</th><th>Masuk</th><th>Akhir</th><th>Terpakai</th><th>Keterangan</th><th>Aksi</th>
             </tr></thead>
             <tbody id="tbodyStock"></tbody>
           </table>
@@ -508,7 +510,7 @@ function simpanPenjualan() {
 function renderStockInputs() {
   var container = document.getElementById('stockCards');
   container.innerHTML = STOCK_ITEMS.map(function (item) {
-    var s = stockState[item.id] || { awal: 0, masuk: 0, akhir: 0, keluar: 0 };
+    var s = stockState[item.id] || { awal: 0, masuk: 0, akhir: 0, keluar: 0, keterangan: '' };
     return '<div class="card">' +
       '<div class="card-head"><div class="icon" style="background:' + item.color + '22">' + item.icon + '</div>' +
       '<div><h2>' + item.nama + '</h2><span>Satuan: ' + item.unit + '</span></div></div>' +
@@ -524,6 +526,7 @@ function renderStockInputs() {
             '<input class="stock-total-input" id="keluar-' + item.id + '" data-item="' + item.id + '" type="number" step="0.1" value="' + s.keluar + '">' +
             '<span class="stock-unit-label">' + item.unit + '</span>' +
           '</div></div>' +
+        '<input class="note-input" data-item="' + item.id + '" type="text" maxlength=200 placeholder="Keterangan (opsional)" value="' + escapeHTML(s.keterangan || '') + '">' +
       '</div></div>';
   }).join('');
 
@@ -539,6 +542,7 @@ function renderStockInputs() {
       if (inputKeluar) inputKeluar.value = s.keluar;
 
       renderChart();
+      if (id === 'ayam') syncPenusukanDenganAyam();
     });
   });
 
@@ -553,8 +557,25 @@ function renderStockInputs() {
       if (inputAkhir) inputAkhir.value = s.akhir;
 
       renderChart();
+      if (id === 'ayam') syncPenusukanDenganAyam();
     });
   });
+
+  container.querySelectorAll('input.note-input').forEach(function (inp) {
+    inp.addEventListener('input', function (e) {
+      var id = e.target.dataset.item;
+      stockState[id].keterangan = e.target.value;
+    });
+  });
+}
+
+function syncPenusukanDenganAyam() {
+  var ayam = stockState.ayam || { keluar: 0 };
+  var input = document.getElementById('penusukan');
+  if (input) {
+    input.value = Number(ayam.keluar) || 0;
+    hitungPenjualan();
+  }
 }
 
 function simpanSemuaStock() {
@@ -563,13 +584,16 @@ function simpanSemuaStock() {
     var s = stockState[item.id];
     s.tanggal = tanggal.toDateString();
     riwayatStock.unshift({
+      id: Date.now().toString(36) + '-' + item.id + '-' + Math.random().toString(36).slice(2,7),
       tanggalLabel: formatTanggalPendek(tanggal),
       itemId: item.id, nama: item.nama, unit: item.unit,
-      awal: s.awal, masuk: s.masuk, akhir: s.akhir, keluar: s.keluar
+      awal: s.awal, masuk: s.masuk, akhir: s.akhir, keluar: s.keluar,
+      keterangan: s.keterangan || ''
     });
   });
   saveJSON('stock-state', stockState);
   saveJSON('riwayat-stock', riwayatStock);
+  syncPenusukanDenganAyam();
   document.getElementById('stockSaveStatus').textContent = '✓ Semua stock tersimpan · ' + formatTanggalPendek(tanggal);
   renderRiwayat();
   renderChart();
@@ -578,7 +602,7 @@ function simpanSemuaStock() {
 function resetSemuaStock() {
   var tanggal = new Date().toDateString();
   STOCK_ITEMS.forEach(function (item) {
-    stockState[item.id] = { awal: 0, masuk: 0, akhir: 0, keluar: 0, tanggal: tanggal };
+    stockState[item.id] = { awal: 0, masuk: 0, akhir: 0, keluar: 0, keterangan: '', tanggal: tanggal };
   });
   saveJSON('stock-state', stockState);
   renderStockInputs();
@@ -636,6 +660,12 @@ function renderChart() {
   }).join('');
 }
 
+function escapeHTML(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 /* =========================
    RIWAYAT
 ========================= */
@@ -664,14 +694,17 @@ function renderRiwayat() {
   var tbodyS = document.getElementById('tbodyStock');
   var rows = riwayatStock.filter(function (r) { return filterVal === 'all' || r.itemId === filterVal; });
   if (rows.length === 0) {
-    tbodyS.innerHTML = '<tr><td colspan="6" class="empty">Belum ada riwayat stock</td></tr>';
+    tbodyS.innerHTML = '<tr><td colspan="8" class="empty">Belum ada riwayat stock</td></tr>';
   } else {
     tbodyS.innerHTML = rows.map(function (r) {
       var itemCfg = STOCK_ITEMS.find(function (i) { return i.id === r.itemId; });
       var icon = itemCfg ? itemCfg.icon : '';
-      return '<tr><td>' + r.tanggalLabel + '</td><td>' + icon + ' ' + r.nama + '</td>' +
+      var rid = escapeHTML(r.id || '');
+      return '<tr><td>' + escapeHTML(r.tanggalLabel) + '</td><td>' + icon + ' ' + escapeHTML(r.nama) + '</td>' +
         '<td>' + format(r.awal) + '</td><td>' + format(r.masuk) + '</td><td>' + format(r.akhir) + '</td>' +
-        '<td><b>' + format(r.keluar) + ' ' + r.unit + '</b></td></tr>';
+        '<td><b>' + format(r.keluar) + ' ' + escapeHTML(r.unit) + '</b></td>' +
+        '<td>' + (r.keterangan ? escapeHTML(r.keterangan) : '<span style="color:#aaa">—</span>') + '</td>' +
+        '<td><button class="row-delete" onclick="hapusSatuStock(\'' + rid + '\')">Hapus</button></td></tr>';
     }).join('');
   }
 }
@@ -687,6 +720,16 @@ function hapusRiwayatPenjualan(btn) {
   saveJSON('riwayat-penjualan', riwayatPenjualan);
   confirmDeleteP = false;
   btn.textContent = '🗑️ Hapus Riwayat Penjualan';
+  renderRiwayat();
+}
+
+function hapusSatuStock(id) {
+  var index = riwayatStock.findIndex(function(r) { return String(r.id || '') === String(id); });
+  if (index < 0) return;
+  var row = riwayatStock[index];
+  if (!confirm('Hapus 1 baris riwayat stock ' + row.nama + '?')) return;
+  riwayatStock.splice(index, 1);
+  saveJSON('riwayat-stock', riwayatStock);
   renderRiwayat();
 }
 
@@ -729,17 +772,21 @@ function init() {
     } else if (s.tanggal !== todayStr) {
       stockState[item.id] = { awal: s.akhir || 0, masuk: 0, akhir: s.akhir || 0, keluar: 0, tanggal: todayStr };
     } else {
+      s.keterangan = s.keterangan || '';
       stockState[item.id] = s;
     }
   });
 
   riwayatStock = loadJSON('riwayat-stock', []);
+  riwayatStock.forEach(function(r, i) { if (!r.id) r.id = 'legacy-' + i + '-' + Date.now().toString(36); });
+  saveJSON('riwayat-stock', riwayatStock);
   riwayatPenjualan = loadJSON('riwayat-penjualan', []);
 
   renderStockInputs();
   renderRiwayat();
   renderChart();
   hitungPenjualan();
+  syncPenusukanDenganAyam();
 }
 
 init();
