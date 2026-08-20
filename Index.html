@@ -116,6 +116,7 @@ body {
 
 .stock-actions { display: flex; gap: 7px; padding: 2px 3px 14px; }
 .stock-actions button { flex: 1; height: 38px; border-radius: 10px; font-size: 12px; cursor: pointer; font-weight:600; }
+.stock-item-save { width:100%; margin-top:9px; height:36px; border-radius:9px; border:none; background:#d71920; color:#fff; font-size:11px; font-weight:600; cursor:pointer; }
 .save { background: #d71920; color: white; border: none; }
 .reset { background: white; border: 1px solid #dcd3c4; color: #777; }
 .save-status { text-align: center; padding-bottom: 6px; font-size: 10px; color: #8a7f6c; min-height: 14px; }
@@ -290,7 +291,6 @@ td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11p
 
       <div class="stock-actions">
         <button class="save" onclick="simpanSemuaStock()">💾 Simpan Semua Stock</button>
-        <button class="reset" onclick="resetSemuaStock()">Reset</button>
       </div>
       <div id="stockSaveStatus" class="save-status"></div>
     </div>
@@ -538,6 +538,7 @@ function renderStockInputs() {
             '<span class="stock-unit-label">' + item.unit + '</span>' +
           '</div></div>' +
         '<input class="note-input" data-item="' + item.id + '" type="text" maxlength=200 placeholder="Keterangan (opsional)" value="' + escapeHTML(s.keterangan || '') + '">' +
+        '<button class="save stock-item-save" type="button" onclick="simpanStockItem(\'' + item.id + '\')">💾 Simpan ' + escapeHTML(item.nama) + '</button>' +
       '</div></div>';
   }).join('');
 
@@ -589,6 +590,31 @@ function syncPenusukanDenganAyam() {
   }
 }
 
+function simpanStockItem(itemId) {
+  var item = STOCK_ITEMS.find(function (i) { return i.id === itemId; });
+  if (!item) return;
+
+  var s = stockState[itemId];
+  var tanggal = new Date();
+  s.tanggal = tanggal.toDateString();
+
+  riwayatStock.unshift({
+    id: Date.now().toString(36) + '-' + item.id + '-' + Math.random().toString(36).slice(2,7),
+    tanggalLabel: formatTanggalPendek(tanggal),
+    itemId: item.id, nama: item.nama, unit: item.unit,
+    awal: s.awal, masuk: s.masuk, akhir: s.akhir, keluar: s.keluar,
+    keterangan: s.keterangan || ''
+  });
+
+  saveJSON('stock-state', stockState);
+  saveJSON('riwayat-stock', riwayatStock);
+  syncPenusukanDenganAyam();
+  document.getElementById('stockSaveStatus').textContent =
+    '✓ ' + item.nama + ' tersimpan · ' + formatTanggalPendek(tanggal);
+  renderRiwayat();
+  renderChart();
+}
+
 function simpanSemuaStock() {
   var tanggal = new Date();
   STOCK_ITEMS.forEach(function (item) {
@@ -630,8 +656,10 @@ function renderChart() {
 
   var labels = STOCK_ITEMS.map(function (i) { return i.icon + ' ' + i.nama; });
   var data = STOCK_ITEMS.map(function (i) {
-    var s = stockState[i.id] || { akhir: 0 };
-    return s.akhir;
+    // Diagram beranda memakai stok akhir dari entri riwayat stock
+    // yang paling baru disimpan untuk setiap item.
+    var latest = riwayatStock.find(function (r) { return r.itemId === i.id; });
+    return latest ? (Number(latest.akhir) || 0) : 0;
   });
   var colors = STOCK_ITEMS.map(function (i) { return i.color; });
 
