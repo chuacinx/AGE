@@ -3,426 +3,387 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Ayam Guling Enakko</title>
-<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIkF5YW0gR3VsaW5nIEVuYWtrbyIsICJzaG9ydF9uYW1lIjogIkFHRSBLYWxrdWxhdG9yIiwgImRlc2NyaXB0aW9uIjogIkthbGt1bGF0b3IgcGVuanVhbGFuICYgc3RvY2sgQXlhbSBHdWxpbmcgRW5ha2tvIiwgInN0YXJ0X3VybCI6ICIuL2luZGV4Lmh0bWwiLCAic2NvcGUiOiAiLi8iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwgImJhY2tncm91bmRfY29sb3IiOiAiI2Y1ZjFlOCIsICJ0aGVtZV9jb2xvciI6ICIjZDcxOTIwIiwgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTUFBQUFEQUNBWUFBQUJTM0d3SEFBQU5Ba2xFUVZSNG5PM2RlM0JVMVIwSDhPL2UzZXh1c3ErZ1FnZ1BTVUI1VkRFZ29FVkVGT1Zwd3ZzeEhTcHFIUjNIMXJGMmFsdXJqclcxVmpzNmJYWHFvN2JqYUtldE9pZ3ZSWVFabFpkQkJSMEdGQlNDa1FRU0lBU3kyZDFrMy8yRENTT1FaTS9aZTNmMzdwN3ZaOFkvZ0HUFBPY0dmdDgvNXI4V0NITnRiWHBIMTlsS0d3cmhpOHp6Z3ZSV1p4Tml3Y2M3U3FRUGd2eWZ1YWRCS1FDU01KdkxKRHp5UjdvSGlRUmNaRWhWdm5KSEJBTVdBS1Nmdmdic0FFUTJ1T2ptdzFjZUFBUURCNEJnTFFvQUFpNS95a1VqZDZyNE1TcFRQVWdhQW4vNlV6MUxWYjY4QllQRlRJZWl0am5zTUFJdWZDa2xQOWN4ekFGSmF0d0HncHo4Vm91N3FtaXNBS2UyOEFQRFRud3JadWZYTkZZQ1VkbFlBK09sUEt2aCtuWE1GSUtXZENRQS8vVWtsWGZYT0ZZQ1V4Z0NRMGl3QXR6K2tMcTRBcERRR2dKVEdBSkRTTk83L1NXVmNBVWhwREFBcGpRRWdwVEVBcERRR2dKVEdBSkRTR0FCU0dnTkFTbU1BU0drTUABmU5AS0NsTVFDa05BYUFsTVlBa05JWUFGSWFBMEJLWXdCSWFRd0FLWTBCSUtVeEFLUTBCb0NVeGdDUTBoZ0FVaG9EUUVwakFFaHBEQUFwalFFZ3BURUFwRFFHZ0pUR0FKRFNHQUJTR2dOQVNtTUFTR2tNQUNtTkFTQ2xNUUNrTkFhQWxNWUFrTklZQUZJYUEwQktzK1Y2QWlyU1BHNDRxNjZBYy9SbGNJd1lnYUtCQTJBcjd3OXJhU2tzVGdjMGh3UEpXQXlKWUFpSllCQ0pZQWl4bHVPSUhxeEg1TnQ6UkE0ZVJIanYxNGcySHM3MWo1TDNMUG4wTDhYM3VYMDV5djc0bVBSeGJXK3NRTlA5RDJSZ1J1JnNmUytDZCtGOHVLZmRpT0lKNDJHeFdYWDNHVzA8ak5ESDJ4SDZ1QmJCVFZzUU8zb3NyWDVLbHk5RC95Y2YxejJmZExTKytES08vZjZKbkl3TjVOa0s0RnU2S0szalBOV3pjZlNoUjVFSWhReWVVV3FPSDR6Q1JUKy9GKzRaMDJBcE12YXZ1MmpRUVBpV0xJUnZ5VUlnSGtkdzgxYTB2ZmtXMnRkdlFESWNOblNzUXBVM0AXC1GQTduRmFQVE9sWnpsY0JUUFF0dGI3NWw4S3g2Wml2cmgzNi9leGplT2RXQXhaTDVBYTFXdUc2WUF0Y05VeEJyYXNhQmNSTXpQMllCeUp1VDRIUS8vYzhjdjBUZjhUSzhDK2FoOHFNTjhNNnR5VTd4bjBOenViSStacjdLanhYQWFvVjN3VHhkWFpSTXZCcEZnd2NoMnRCb3pKeTZZN1dpM3lNUDRvSzc3c2pjR0dTb3ZGZ0IzRGRNZ2ExZlgzMmRXQ3p3TFY1Z3pJUzZZN1ZpNEF2UHNmanpURjRFd0tqdGkyL3h3c3hzU1N3V0RIajJHWGlxWnhuZk4yV1U2YmRBVnA4UDd1azNHdEpYMFpDTFVYTDFCSVMyZjJwSWYxMHV2UGNlZU9mUFRmdjQ2S0dHMDVjeXQ5WWlVbGVIK01sVGlMZTJJaG1Pd0ZycWcxWmFDcXZQQi9zbHcxQmNOUnJPTVZWd2pCb0JpOTF1NEEraEp0TUh3THRncnFIL28zMUxGeGthZ09LcnhxUHZBL2VuZFd6SFp6dlE4c3pmRU55OHRjYzJzZU10d1BHVzArMTM3RVRiNjI4Q0FDd09CMXlUSjhFOWF6cThOOCtHNXZXa05RZlZtZjVHV01WN2ErQ3NTdS95WjNjU3dSQU9WRTB3NUo2QXhXWkZ4Y1oxY0l3WYLqVIHQWhOdi9nVjJ0ZThxM3NPd09rd2VHdG1vODlkZDhCNStXVkkrTnZ4emNncmhJK1h2UkcyZjJRVjRuNS9PbE0xSFZPZkF6aUdYeXBjL05IdkRnbTEwMXdsOE15ZW9XZGFaNVRlc2t5NitLT0hqK0M3T1lzTUszNEFTSWJEYUZ1eEV2WFRxOUH3bytYbzJQbTVZWDBYT2xNSFFPYmt0L25YRHlFUkZQdFVOK1NrMm1yRkJYZmZLWFZJc3JNVGpiZmNqdkJYZS9XUDM0UGdwaTFvV0haYnh2b3ZOT1lOZ05VSzc4SjVRazJqUjVvUTNMSU5nUTBiaGRxWFRKcUlva0VEZFV3TzhNeWNqcUxCZzZTT2FmN3Rvd2p2KzBiWHVHUXMwd2JBZmYxMXNKWDFFMnJidm1vdGtFekN2MnFOV09jRzNCUHd6cXVSYXQveDJZNHpKN0JrSHFZTmdNdzJwYXZ3Z3g5dFJyeXRUYXoveFF2VG1oY0FXSnhPdUtaZUwzVk02NHYvVEhzOHloeFRCc0RxODhFOTR5YWh0pEc2ZytqYzh5VUFJQm1OaFgzZGVxSGppaXFHb09UcUNXbk5yN2hxTkxUaVl1SDIwY2JEYUg5ZmJIdEcyV1hLQUhqbTFRaGYr2V2V252V3I5dlArWFZ2dkV2U1d3V0t4MTBwMVQ2NFpTdVFTS1ExRm1XV0tXK0VsYWF4L2VrUy9IZzdZc2RiWU90N1VjcGp2VFhWT1Bid1kwaDBkRWpOenk1NTZiUGoweDFTN2MzdTBuMjdET21uK1plL3dhbi92bUZJWCtreTNRcGd2L1FTT01kV0NiWHQzUE1sSW5VSHovN05lQnp0NzZ3VE9sNXp1K0JPNDU2QTdOV2ZqcDFmU0k5QjJXRzZGVURtdWYrZXJ2cjRWNjFGbjl1WEM0L25mMnVWOEpnQVVGVGVYNnA5N0pqY3E0cnVhVk14Nk5WL1NSM3RuWk92dklhakR6MnF1NTlDWnE0VndHcUZUL0RhUDVKSnRLOStwOXMvNnRpeEU5SERSNFM2Y1YwekVVVURCd2hPOERTcEYwN2ljU1RhQTFMOVUvYVlLZ0N1S1pOaEt5c1RhdHRya2ZjU2p2Tm9HcnlMNU80SldDU3VBTVg5ZmlCcDZzZXRsR2FxQVBna3JzcWNlL1hudkQ5ZkxYNDFTR1pjYWF4OVV6Tk5BS3hlTHp3enBvazFqc2ZoWDl2N3cyU2R1L2NnY3ZCYm9lN3NsUlVvbmpCZWJHeWNmcVpIbE9iMUNyZWw3RE5OQUR6emFtQnhPSVRhQnJmVkl0NXlJbVc3Vkt2RTk4bWNmQ2VDUWVHMkZwc1ZtcHN2cVp1VmFRSWc5ZWpEU3JGbmZtUzJRZDZhbTJGeE9vWGF4cHFQQ3ZjTEFMYStPdDlucG93eHhXVlErN0NoS0w1eWpGRGJaQ1NDd0H3dkM3V043RCtBOE41OWNJd2FtYkt0NW5IRE0zc20vRyt2U3RrMjJ0Q0k0cXZFdDB6T0s4Y2c4bTI5Y0h1ejR3c3hCcFBaZmdRLzNDVDFseSs2V2dEaUo4UGhmVjhMOXdrQUplUEhTYlVQYlB3QSt3WlVkdnRmNDYzODFna2o1WDRGMERUNEZzMFhidTZlTVEwamo0aWQzTXB5WFhzTmBPWDlFV3RxN3JWZHgrZHlkM3pMSmsvU015M3A3MWN4cHY4bmtncFIwWkNMVVR5bUNzN1JsOE0rckJLMkFlV3dsWlZCS3lrNXZkMnlXSkFJQnBBSUJKRUlCSkFJQkJBNzBvencvZ09uMzNMYmZ3Q1J1b05JaHNPNS9sSHlIZ05BU3N2NSt3QkV1Y1FBa05JWUFGSWFBMEJLWXdCSWFRd0FLWTBCSUtVeEFLUTBCb0NVeGdDUTBoZ0FVaG9EUUVwakFFaHBEQUFwalFFZ3BURUFwRFFHZ0pUR0FKRFNHQUJTR2dOQVNtTUFTR2tNQUNtTkFTQ2xNUUNrTkFhQWxNWUFrTklZQUZJYUEwQktZd0JJYVF3QUtZMEJJS1V4QUtRMEJvQ1V4Z0NRMGhnQVVob0RRRXBqQUVocERBQXBqUUVncFRFQXBEUUdnSlNtaldxcXQrUjZFa1M1d2hXQWxNWUFrTklZQUZLYUJnQThEeUFWaldxcXQzQUZJS1V4QUtRME13SGdOb2hVMGxYdlhBRklhV2NGZ0tzQXFlRDdkYzRWZ0pSMlhnQzRDbEFoTzdlK3VRS1Ewcm9OQUZjQktrVGQxVFZYQUZKYWp3SGdLa0NGcEtkNjduVUZZQWlvRVBSV3h5bTNRQXdCNWJOVTljdHpBRkthVUFDNENsQStFcWxiNFJXQUlhQjhJbHF2VWxzZ2hvRHlnVXlkU3A4RE1BUmtackwxcWF1WTk1WlhKUFVjVDJTVWREK1lkVjBGNG1wQVpxQ25EblZmQm1VSUtKZjAxcCtoeGNzdEVXV0xVUis4R2ZuMFpoQW9VNHptZWNSMCs4SWdrRkV5dGRYT3l2NmRRYUIwWmZvY00rc25zQXdEcFpMTkN5di9COGhDdk5PbzM5QjFBQUFBQUVsRlRrU3VRbUNDIiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifV19">
-<meta name="theme-color" content="#d71920">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="AGE Kalkulator">
+<title>AGE MT. HARYONO - Dashboard Premium</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-* { box-sizing: border-box; }
+:root {
+  --primary-red: #d71920;
+  --dark-red: #8f080d;
+  --gold: #ffc837;
+  --gold-dark: #d49a00;
+  --bg-app: #f6f3ed;
+  --surface: #ffffff;
+  --text-main: #1f1a17;
+  --text-sub: #8a7f6c;
+  --border: #e8e2d5;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-  margin: 0;
-  background: #f5f1e8;
-  color: #29251f;
+  margin: 0; background: #0a0102; color: var(--text-main);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex; justify-content: center;
 }
 
 .app {
-  width: 100%;
-  max-width: 430px;
-  margin: auto;
-  min-height: 100vh;
-  position: relative;
-  padding-bottom: 78px;
+  width: 100%; max-width: 430px; min-height: 100vh;
+  background: var(--bg-app); position: relative; padding-bottom: 85px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6); overflow-x: hidden;
 }
 
-.pagewrap { padding: 15px 14px 24px; }
-
-.page { display: none; }
-.page.active { display: block; }
-
-/* ========= BANNER ========= */
-.banner {
-  width: 100%;
-  height: 150px;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 15px;
-  box-shadow: 0 5px 18px rgba(80,30,0,.15);
-  background: linear-gradient(135deg, #d71920 0%, #a3120c 60%, #6e0d09 100%);
-  background-size: cover;
-  background-position: center;
+/* ========= SLIDE PAGE TRANSITION ========= */
+.pages-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+  width: 300%;
+  min-height: calc(100vh - 85px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.page {
+  width: 33.3333%;
+  flex-shrink: 0;
+  display: block !important;
+  opacity: 1;
+}
+
+.pagewrap { padding: 16px 14px 24px; }
+
+/* ========= ESTETIK BANNER DEDICATED ========= */
+.banner {
+  width: 100%; height: 150px; border-radius: 20px;
+  overflow: hidden; position: relative; margin-bottom: 14px;
+  box-shadow: 0 8px 24px rgba(143, 8, 13, 0.3);
+  background: linear-gradient(135deg, #d71920 0%, #9e0b11 50%, #4a0205 100%);
+  background-size: cover; background-position: center;
+  display: flex; align-items: flex-end; padding: 16px 18px;
+  border: 1px solid rgba(255, 200, 55, 0.4);
   cursor: pointer;
 }
 
 .banner-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.35);
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(15, 2, 3, 0.8) 100%);
   z-index: 1;
 }
 
-.banner .b-emoji, .banner .b-text, .banner .upload-hint {
-  position: relative;
-  z-index: 2;
+.banner .b-text { position: relative; z-index: 2; color: #fff; width: 100%; }
+.banner .b-title {
+  font-size: 21px; font-weight: 900; letter-spacing: -0.3px;
+  background: linear-gradient(45deg, #ffffff, #ffe399);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
+.banner .b-sub { font-size: 11px; color: var(--gold); font-weight: 700; margin-top: 2px; text-transform: uppercase; }
 
-.banner .b-emoji { font-size: 54px; filter: drop-shadow(0 4px 6px rgba(0,0,0,.25)); }
-.banner .b-text { color: #fff7ec; text-align: right; transform: translateY(50px); }
-.banner .b-text .b-title { font-size: 20px; font-weight: 800; letter-spacing: -.3px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
-.banner .b-text .b-sub { font-size: 11px; opacity: .9; margin-top: 3px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
-.banner .upload-hint {
-  position: absolute;
-  bottom: 8px;
-  left: 15px;
-  font-size: 9px;
-  color: #fff;
-  background: rgba(0,0,0,0.5);
-  padding: 3px 8px;
-  border-radius: 10px;
+.upload-hint {
+  position: absolute; top: 10px; right: 10px; z-index: 2;
+  font-size: 9px; color: #fff; background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px); padding: 4px 8px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 /* ========= HEADER ========= */
-.header { margin-bottom: 14px; padding: 0 3px; }
-.header h1 { margin: 0; color: #d71920; font-size: 23px; font-weight: 800; letter-spacing: -0.5px; }
-.header p { margin: 4px 0 0; color: #8d806d; font-size: 12px; }
-.section-title { font-size: 13px; font-weight: 700; color: #29251f; margin: 4px 3px 8px; display:flex; align-items:center; gap:6px; }
-.section-title small { font-weight: 400; color: #9a8f7d; font-size: 10px; }
+.header { margin-bottom: 14px; }
+.header h1 { margin: 0; font-size: 22px; font-weight: 900; color: var(--dark-red); letter-spacing: -0.5px; }
+.header p { margin: 3px 0 0; color: var(--text-sub); font-size: 11px; font-weight: 500; }
 
-/* ========= CARD ========= */
-.card {
-  background: #fff;
-  border-radius: 18px;
-  margin-bottom: 15px;
-  border: 1px solid #eadfd1;
-  overflow: hidden;
-  box-shadow: 0 3px 12px rgba(55,45,30,.05);
+.section-title {
+  font-size: 12px; font-weight: 800; color: var(--text-main);
+  margin: 16px 2px 8px; display: flex; justify-content: space-between; align-items: center;
+  text-transform: uppercase; letter-spacing: 0.5px;
 }
-.card-head { padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f0e9df; background: #fdfbf7; }
-.card-head-left { display: flex; align-items: center; gap: 9px; }
-.icon { width: 32px; height: 32px; border-radius: 10px; background: #fff0cf; display: flex; justify-content: center; align-items: center; font-size: 16px; flex-shrink:0; }
-.card-head h2 { margin: 0; font-size: 14px; color: #29251f; }
-.card-head span { display: block; color: #9a8f7d; font-size: 10px; margin-top: 1px; }
+.section-title small { font-weight: 500; color: var(--text-sub); text-transform: none; font-size: 10px; }
+
+/* ========= CARDS ========= */
+.card {
+  background: var(--surface); border-radius: 18px; margin-bottom: 14px;
+  border: 1px solid var(--border); overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.card-head {
+  padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid #f2ede4; background: linear-gradient(90deg, #fffcf7, #ffffff);
+}
+.card-head-left { display: flex; align-items: center; gap: 10px; }
+.icon {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, #fff5dc, #ffeaaf);
+  display: flex; justify-content: center; align-items: center;
+  font-size: 16px; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(212,154,0,0.15);
+}
+.card-head h2 { margin: 0; font-size: 14px; font-weight: 800; color: var(--text-main); }
+.card-head span { display: block; color: var(--text-sub); font-size: 10px; }
+
+/* ========= FORM & STEPPERS ========= */
+.sale-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 16px; border-top: 1px solid #f5f0e6; }
+.sale-row:first-child { border-top: none; }
+.sale-name { font-size: 13px; font-weight: 700; color: #2c2520; }
+.sale-name small { display: block; color: var(--text-sub); font-size: 10px; font-weight: 500; margin-top: 2px; }
+
+.stepper { display: flex; align-items: center; gap: 8px; }
+.stepper button {
+  width: 32px; height: 32px; border-radius: 9px; border: 1px solid #e0d7cb;
+  background: #fff; font-size: 16px; font-weight: bold; cursor: pointer; color: #332c27;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03); transition: transform 0.1s;
+}
+.stepper button:active { transform: scale(0.92); }
+.stepper .plus {
+  background: linear-gradient(135deg, #d71920, #9e0b11);
+  border: none; color: white; box-shadow: 0 3px 8px rgba(215,25,32,0.3);
+}
+.stepper input {
+  width: 75px; height: 32px; border: 1px solid #e0d7cb; border-radius: 9px;
+  text-align: center; font-family: monospace; font-size: 14px; font-weight: 800; background: #fdfbf7;
+}
+
+.sale-total {
+  background: linear-gradient(135deg, #1f1a17, #342c26); color: white;
+  padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
+}
+.sale-total span { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; color: #d1c7b7; }
+.sale-total strong { font-family: monospace; font-size: 21px; color: var(--gold); }
+
+.penusukan { padding: 14px 16px; background: #fffdf5; border-top: 2px dashed #f0e3bf; }
+.penusukan-top { display: flex; justify-content: space-between; align-items: center; }
+.penusukan-title { font-size: 12px; font-weight: 800; }
+.penusukan-title small { display: block; color: var(--text-sub); font-weight: 500; font-size: 10px; margin-top: 1px; }
+.penusukan-input { width: 78px; height: 34px; border: 1px solid #dcd0b9; border-radius: 9px; text-align: center; font-family: monospace; font-size: 14px; font-weight: 800; background: #fff; }
+
+.difference { margin-top: 10px; padding: 10px 14px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; }
+.difference-label { font-size: 10px; font-weight: 800; }
+.difference-desc { font-size: 9px; opacity: 0.8; }
+.difference-number { font-family: monospace; font-size: 18px; font-weight: 800; }
+
+.sale-note { padding: 12px 16px; border-top: 1px solid #f5f0e6; }
+.sale-note label { display: block; margin-bottom: 5px; font-size: 10px; color: var(--text-sub); font-weight: 700; }
+.sale-note input { width: 100%; height: 36px; border: 1px solid #e0d7cb; border-radius: 9px; padding: 0 10px; font-size: 11px; background: #fdfbf7; outline: none; }
+
+.sale-save, .save {
+  height: 40px; border-radius: 11px; border: none;
+  background: linear-gradient(135deg, #d71920 0%, #9e0b11 100%);
+  color: #fff; font-weight: 700; font-size: 12px; width: calc(100% - 32px);
+  margin: 10px 16px 14px; cursor: pointer; box-shadow: 0 4px 14px rgba(215,25,32,0.3);
+}
 
 /* ========= STOCK FORM ========= */
-.stock-body { padding: 0 17px 15px; }
-.stock-line { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #eee9df; }
-.stock-line:last-of-type { border-bottom: none; }
-.stock-label { font-size: 12px; }
-.number-input { width: 78px; height: 31px; border: 1px solid #dcd3c4; border-radius: 8px; text-align: center; font-family: monospace; font-weight: bold; font-size: 14px; background: #fff; }
-.stock-total { margin-top: 10px; padding: 11px 13px; border-radius: 10px; background: #29251f; color: white; display: flex; align-items: center; justify-content: space-between; }
-.stock-total label { font-size: 10px; color: #d9d3c8; }
+.stock-body { padding: 0 16px 14px; }
+.stock-line { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #f5f0e6; }
+.stock-label { font-size: 12px; font-weight: 600; }
+.number-input { width: 78px; height: 32px; border: 1px solid #e0d7cb; border-radius: 7px; text-align: center; font-family: monospace; font-weight: 800; font-size: 13px; }
+.stock-total { margin-top: 12px; padding: 11px 14px; border-radius: 10px; background: #1f1a17; color: white; display: flex; align-items: center; justify-content: space-between; }
+.stock-total label { font-size: 10px; font-weight: 800; color: var(--gold); }
 .stock-total-input-wrap { display: flex; align-items: center; gap: 6px; }
-.stock-total-input { width: 78px; height: 31px; border: 1px solid rgba(255,255,255,0.4); border-radius: 8px; text-align: center; font-family: monospace; font-weight: bold; font-size: 14px; background: rgba(255,255,255,0.15); color: #fff; }
-.stock-unit-label { font-size: 12px; font-weight: bold; color: #fff; }
+.stock-total-input { width: 78px; height: 32px; border: 1px solid rgba(255,255,255,0.25); border-radius: 7px; text-align: center; font-family: monospace; font-weight: 800; font-size: 14px; background: rgba(255,255,255,0.12); color: #fff; }
+.stock-unit-label { font-size: 11px; font-weight: 700; }
+.note-input { width: 100%; height: 34px; border: 1px solid #e0d7cb; border-radius: 7px; padding: 0 10px; font-size: 11px; margin-top: 10px; }
+.stock-item-save { width: 100%; margin: 12px 0 0; height: 36px; }
+.stock-actions { padding: 0 4px 10px; }
+.stock-actions .save { width: 100%; margin: 0; }
+.save-status { text-align: center; font-size: 10px; font-weight: 600; color: var(--text-sub); min-height: 14px; padding-bottom: 4px; }
 
-.stock-actions { display: flex; gap: 7px; padding: 2px 3px 14px; }
-.stock-actions button { flex: 1; height: 38px; border-radius: 10px; font-size: 12px; cursor: pointer; font-weight:600; }
-.stock-item-save { width:100%; margin-top:9px; height:36px; border-radius:9px; border:none; background:#d71920; color:#fff; font-size:11px; font-weight:600; cursor:pointer; }
-.save { background: #d71920; color: white; border: none; }
-.save-status { text-align: center; padding-bottom: 6px; font-size: 10px; color: #8a7f6c; min-height: 14px; }
-
-/* ========= PENJUALAN ========= */
-.sale-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 17px; border-top: 1px solid #eee9df; }
-.sale-name { font-size: 13px; font-weight: 600; }
-.sale-name small { display: block; color: #999; font-size: 10px; font-weight: normal; margin-top: 2px; }
-.stepper { display: flex; align-items: center; gap: 7px; }
-.stepper button { width: 30px; height: 30px; border-radius: 50%; border: 1px solid #ddd5c8; background: white; font-size: 17px; cursor: pointer; }
-.stepper .plus { background: #d71920; border: none; color: white; }
-.stepper input { width: 90px; border: 1px solid #ddd5c8; border-radius: 6px; background: #fff; text-align: center; font-family: monospace; font-size: 14px; font-weight: bold; padding: 4px; }
-.stepper input:focus { border-color: #d71920; outline: none; }
-.sale-total { background: #29251f; color: white; padding: 15px 17px; display: flex; justify-content: space-between; align-items: center; }
-.sale-total span:first-child { font-size: 11px; }
-.sale-total strong { font-family: monospace; font-size: 21px; }
-.sale-note { padding: 11px 17px 12px; border-top: 1px solid #eee9df; }
-.sale-note label { display:block; margin-bottom:5px; font-size:10px; color:#8a7f6c; font-weight:600; }
-.sale-note input { width:100%; box-sizing:border-box; height:36px; border:1px solid #ddd5c8; border-radius:9px; padding:0 10px; font-family:inherit; font-size:12px; background:#fff; color:#29251f; outline:none; }
-.sale-note input:focus { border-color:#d71920; }
-
-.penusukan { padding: 14px 17px 16px; background: #fff9e8; border-top: 3px solid #ffc400; }
-.penusukan-top { display: flex; justify-content: space-between; align-items: center; }
-.penusukan-title { font-size: 12px; font-weight: bold; }
-.penusukan-title small { display: block; color: #999; font-weight: normal; font-size: 10px; margin-top: 2px; }
-.penusukan-input { width: 90px; height: 34px; border: 1px solid #d8cfbf; border-radius: 9px; text-align: center; font-family: monospace; font-size: 14px; font-weight: bold; background: #fff; }
-
-.difference { margin-top: 12px; padding: 13px 14px; border-radius: 11px; display: flex; align-items: center; justify-content: space-between; }
-.difference-label { font-size: 11px; font-weight: bold; }
-.difference-desc { font-size: 9px; margin-top: 2px; opacity: .7; }
-.difference-number { font-family: monospace; font-size: 19px; font-weight: bold; }
-
-.sale-save { margin: 12px 17px 15px; height: 38px; border-radius: 10px; border: none; background: #d71920; color: #fff; font-weight: 600; font-size: 12px; width: calc(100% - 34px); cursor:pointer; }
-
-/* ========= CHART CARD ========= */
-.chart-card { padding: 15px 17px 17px; }
-.chart-wrap { height: 200px; position: relative; margin-top: 6px; }
+/* ========= CHART & TABLES ========= */
+.chart-card { padding: 16px; }
+.chart-wrap { height: 190px; position: relative; margin-top: 6px; }
 .legend-list { margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
 .legend-row { display: flex; align-items: center; gap: 8px; font-size: 11px; }
 .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
-.legend-name { flex: 1; color: #4a4235; }
-.legend-val { font-family: monospace; font-weight: 700; color: #29251f; }
+.legend-name { flex: 1; color: #4a4235; font-weight: 600; }
+.legend-val { font-family: monospace; font-weight: 800; }
 
-/* ========= FILTER MATRIX TABS ========= */
-.item-filter-tabs {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  padding: 4px 0 10px;
-  scrollbar-width: none;
-}
+.item-filter-tabs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 10px; scrollbar-width: none; }
 .item-filter-tabs::-webkit-scrollbar { display: none; }
 .tab-btn {
-  white-space: nowrap;
-  background: #fff;
-  border: 1px solid #dcd3c4;
-  border-radius: 20px;
-  padding: 6px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #554e42;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  white-space: nowrap; background: #fff; border: 1px solid #e0d7cb; border-radius: 16px;
+  padding: 6px 14px; font-size: 11px; font-weight: 700; color: #554e42; cursor: pointer;
 }
-.tab-btn.active {
-  background: #d71920;
-  color: #fff;
-  border-color: #d71920;
-  box-shadow: 0 2px 6px rgba(215,25,32,0.25);
-}
+.tab-btn.active { background: linear-gradient(135deg, #d71920, #9e0b11); color: #fff; border-color: #d71920; }
 
-/* ========= RIWAYAT & VERTIKAL EXCEL TABLE ========= */
-.riwayat-head { display:flex; align-items:center; justify-content:space-between; padding: 12px 15px; gap: 8px; flex-wrap: wrap; }
-.riwayat-head h2 { margin:0; font-size:14px; }
-.month-controls { display: flex; align-items: center; gap: 6px; }
-.filter-select { border:1px solid #dcd3c4; border-radius:6px; font-size:11px; padding:4px 6px; background:#fff; font-family:inherit; }
+.riwayat-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+.riwayat-head h2 { margin: 0; font-size: 14px; font-weight: 800; }
+.month-controls { display: flex; align-items: center; gap: 4px; }
+.filter-select { border: 1px solid #dcd3c4; border-radius: 6px; font-size: 10px; font-weight: 600; padding: 4px 6px; background: #fff; }
 
-.table-scroll { overflow-x: auto; padding: 0 0 10px; }
+.table-scroll { overflow-x: auto; padding-bottom: 2px; }
+table.excel-table { border-collapse: collapse; width: 100%; font-size: 11px; background: #fff; }
+table.excel-table th { background: #f6f3eb; color: #4a4235; font-weight: 800; padding: 6px 4px; border: 1px solid #e2dad0; text-align: center; }
+table.excel-table td { padding: 0; border: 1px solid #eee7dc; text-align: center; height: 28px; }
+table.excel-table tr:nth-child(even) td { background-color: #faf8f5; }
 
-table.excel-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 11px;
-  background: #fff;
-  border-top: 1px solid #dee2e6;
-}
-table.excel-table th {
-  background: #f1f3f5;
-  color: #212529;
-  font-weight: 700;
-  font-size: 11px;
-  padding: 6px;
-  border: 1px solid #ced4da;
-  text-align: center;
-  white-space: nowrap;
-}
-table.excel-table td {
-  padding: 0;
-  border: 1px solid #dee2e6;
-  text-align: center;
-  height: 28px;
-  white-space: nowrap;
-}
-table.excel-table tr:nth-child(even) td {
-  background-color: #f8f9fa;
-}
+.cell-input { width: 100%; height: 100%; border: none; background: transparent; text-align: center; font-family: monospace; font-size: 11px; font-weight: 600; outline: none; }
+.cell-input:focus { background: #fff3d1; }
+.cell-input.text-left { text-align: left; padding: 0 6px; font-family: inherit; }
+.excel-total-row td { background: #efebe4 !important; font-weight: bold; font-family: monospace; padding: 6px 4px; }
+td.empty { text-align: center; color: var(--text-sub); padding: 18px 8px; font-size: 11px; }
+.danger-btn { margin: 10px 16px; height: 34px; border-radius: 8px; border: 1px solid #f0c9c5; background: #fdf3f1; color: #b3261e; font-size: 11px; font-weight: 700; cursor: pointer; width: calc(100% - 32px); }
 
-.cell-input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: transparent;
-  text-align: center;
-  font-family: monospace;
-  font-size: 11px;
-  outline: none;
-  padding: 0 4px;
-  color: #212529;
-}
-.cell-input:focus {
-  background: #e7f5ff;
-  box-shadow: inset 0 0 0 2px #1c7ed6;
-  font-weight: bold;
-}
-.cell-input.text-left {
-  text-align: left;
-  font-family: inherit;
-}
-
-.excel-total-row td {
-  background: #e9ecef !important;
-  font-weight: bold;
-  font-family: monospace;
-  padding: 6px 4px;
-}
-
-td.empty { text-align: center; color: #a89d89; padding: 22px 8px; font-size: 11px; white-space: normal; }
-.danger-btn { margin: 10px 15px 15px; height: 34px; border-radius: 9px; border: 1px solid #f0c9c5; background: #fdf3f1; color: #b3261e; font-size: 11px; font-weight: 600; cursor: pointer; width: calc(100% - 30px); }
-
-/* ========= BOTTOM NAV ========= */
+/* ========= FLOATING NAV BAR ========= */
 .bottomnav {
-  position: fixed;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 100%; max-width: 430px;
-  background: #fff;
-  border-top: 1px solid #eadfd1;
-  display: flex;
-  box-shadow: 0 -4px 16px rgba(60,40,20,.08);
-  z-index: 10;
-  padding-bottom: env(safe-area-inset-bottom);
+  position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
+  width: calc(100% - 24px); max-width: 406px; background: rgba(15, 2, 3, 0.94);
+  backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(255, 200, 55, 0.3);
+  display: flex; z-index: 100; padding: 5px;
 }
-.navbtn { flex:1; border:none; background:none; padding: 10px 0 8px; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; color:#a89d89; font-size:10px; font-family:inherit; }
-.navbtn .nicon { font-size: 19px; }
-.navbtn.active { color: #d71920; }
+.navbtn {
+  flex: 1; border: none; background: none; padding: 8px 0; display: flex;
+  flex-direction: column; align-items: center; gap: 3px; cursor: pointer;
+  color: #a89d89; font-size: 10px; font-weight: 700; border-radius: 15px; transition: all 0.2s;
+}
+.navbtn .nicon { font-size: 18px; }
+.navbtn.active { color: var(--gold); background: rgba(215, 25, 32, 0.45); }
 
-.footer { text-align: center; padding: 4px 10px 2px; color: #9b8e7a; font-size: 10px; }
-.footer b { color: #d71920; }
+.footer { text-align: center; padding: 10px; color: var(--text-sub); font-size: 10px; }
+.footer b { color: var(--primary-red); }
 </style>
 </head>
 <body>
 
 <div class="app">
 
-  <!-- ======================= BERANDA ======================= -->
-  <div id="page-beranda" class="page active">
-    <div class="pagewrap">
+  <!-- CONTAINER SLIDE HALAMAN -->
+  <div class="pages-container" id="pagesContainer">
 
-      <div class="banner" id="bannerCard" onclick="document.getElementById('inputBanner').click()">
-        <div class="banner-overlay" id="bannerOverlay" style="display:none;"></div>
-        <div class="b-emoji" id="bannerEmoji"></div>
-        <div class="b-text">
-          <div class="b-title">Ayam Guling Enakko</div>
-          <div class="b-sub" id="tanggal">Memuat tanggal...</div>
-        </div>
-        <div class="upload-hint">📷 Klik untuk ubah foto</div>
-        <input type="file" id="inputBanner" accept="image/*" style="display:none;" onchange="uploadBanner(event)">
-      </div>
+    <!-- ======================= BERANDA (INDEX 0) ======================= -->
+    <div id="page-beranda" class="page">
+      <div class="pagewrap">
 
-      <div class="header">
-        <h1>AGE MT. HARYONO</h1>
-        <p>Kalkulator penjualan &amp; ringkasan stock hari ini</p>
-      </div>
+        <div class="banner" id="bannerCard" onclick="document.getElementById('inputBanner').click()">
+          <div class="banner-overlay" id="bannerOverlay" style="display:none;"></div>
+          <div class="b-text">
+            <div class="b-title">Ayam Guling Enakko</div>
+            <div class="b-sub" id="tanggal">Memuat tanggal...</div>
+          </div>
+          <div class="upload-hint">📷 Ubah Foto</div>
+          <input type="file" id="inputBanner" accept="image/*" style="display:none;" onchange="uploadBanner(event)">
+        </div>
 
-      <div class="section-title">🧮 Kalkulator Ayam <small>hitung & simpan transaksi hari ini</small></div>
-      <div class="card">
-        <div class="sale-row">
-          <div class="sale-name">Ekor Utuh<small>1 ekor</small></div>
-          <div class="stepper">
-            <button onclick="ubah('utuh', -1)">−</button>
-            <input id="utuh" type="text" value="0" placeholder="0">
-            <button class="plus" onclick="ubah('utuh', 1)">+</button>
-          </div>
+        <div class="header">
+          <h1>AGE MT. HARYONO</h1>
+          <p>Kalkulator penjualan & ringkasan stok hari ini</p>
         </div>
-        <div class="sale-row">
-          <div class="sale-name">Setengah<small>½ ekor</small></div>
-          <div class="stepper">
-            <button onclick="ubah('setengah', -1)">−</button>
-            <input id="setengah" type="text" value="0" placeholder="0">
-            <button class="plus" onclick="ubah('setengah', 1)">+</button>
-          </div>
-        </div>
-        <div class="sale-row">
-          <div class="sale-name">Seperempat<small>¼ ekor</small></div>
-          <div class="stepper">
-            <button onclick="ubah('seperempat', -1)">−</button>
-            <input id="seperempat" type="text" value="0" placeholder="0">
-            <button class="plus" onclick="ubah('seperempat', 1)">+</button>
-          </div>
-        </div>
-        <div class="sale-total">
-          <span>TOTAL PENJUALAN</span>
-          <strong id="totalPenjualan">0 ekor</strong>
-        </div>
-        <div class="penusukan">
-          <div class="penusukan-top">
-            <div class="penusukan-title">🔪 Ayam Penusukan<small>otomatis dari ayam terpakai di Stock Barang</small></div>
-            <input id="penusukan" class="penusukan-input" type="text" value="0" placeholder="0">
-          </div>
-          <div id="difference" class="difference">
-            <div>
-              <div id="differenceLabel" class="difference-label">SELISIH</div>
-              <div id="differenceDesc" class="difference-desc">Penjualan dibanding penusukan</div>
+
+        <div class="section-title">🧮 Kalkulator Penjualan <small>Hitung & simpan</small></div>
+        <div class="card">
+          <div class="sale-row">
+            <div class="sale-name">Ekor Utuh<small>1 ekor</small></div>
+            <div class="stepper">
+              <button onclick="ubah('utuh', -1)">−</button>
+              <input id="utuh" type="text" value="0" placeholder="0">
+              <button class="plus" onclick="ubah('utuh', 1)">+</button>
             </div>
-            <div id="differenceNumber" class="difference-number">0 ekor</div>
+          </div>
+          <div class="sale-row">
+            <div class="sale-name">Setengah<small>½ ekor</small></div>
+            <div class="stepper">
+              <button onclick="ubah('setengah', -1)">−</button>
+              <input id="setengah" type="text" value="0" placeholder="0">
+              <button class="plus" onclick="ubah('setengah', 1)">+</button>
+            </div>
+          </div>
+          <div class="sale-row">
+            <div class="sale-name">Seperempat<small>¼ ekor</small></div>
+            <div class="stepper">
+              <button onclick="ubah('seperempat', -1)">−</button>
+              <input id="seperempat" type="text" value="0" placeholder="0">
+              <button class="plus" onclick="ubah('seperempat', 1)">+</button>
+            </div>
+          </div>
+          <div class="sale-total">
+            <span>TOTAL PENJUALAN</span>
+            <strong id="totalPenjualan">0 ekor</strong>
+          </div>
+          <div class="penusukan">
+            <div class="penusukan-top">
+              <div class="penusukan-title">🔪 Ayam Penusukan<small>Otomatis dari Ayam Terpakai</small></div>
+              <input id="penusukan" class="penusukan-input" type="text" value="0" placeholder="0">
+            </div>
+            <div id="difference" class="difference">
+              <div>
+                <div id="differenceLabel" class="difference-label">SELISIH</div>
+                <div id="differenceDesc" class="difference-desc">Penjualan vs penusukan</div>
+              </div>
+              <div id="differenceNumber" class="difference-number">0 ekor</div>
+            </div>
+          </div>
+          <div class="sale-note">
+            <label for="salesNote">Keterangan Penjualan</label>
+            <input id="salesNote" class="note-input" type="text" maxlength="200" placeholder="Keterangan opsional">
+          </div>
+          <button class="sale-save" onclick="simpanPenjualan()">💾 Simpan Penjualan Hari Ini</button>
+          <div id="salesSaveStatus" class="save-status"></div>
+        </div>
+
+        <div class="section-title">📊 Stock Barang <small>Posisi stok terkini</small></div>
+        <div class="card chart-card">
+          <div class="chart-wrap"><canvas id="stockChart"></canvas></div>
+          <div class="legend-list" id="legendList"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======================= STOCK (INDEX 1) ======================= -->
+    <div id="page-stock" class="page">
+      <div class="pagewrap">
+        <div class="header">
+          <h1>Stok Barang Hari Ini</h1>
+          <p>Catat stok fisik tiap item</p>
+        </div>
+
+        <div id="stockCards"></div>
+
+        <div class="stock-actions">
+          <button class="save" onclick="simpanSemuaStock()">💾 Simpan Semua Stok Ke Matrix</button>
+        </div>
+        <div id="stockSaveStatus" class="save-status"></div>
+      </div>
+    </div>
+
+    <!-- ======================= RIWAYAT (INDEX 2) ======================= -->
+    <div id="page-riwayat" class="page">
+      <div class="pagewrap">
+        <div class="header">
+          <h1>Riwayat & Matrix Excel</h1>
+          <p>Data penjualan & stok berantai</p>
+        </div>
+
+        <div class="card">
+          <div class="riwayat-head"><h2>🧮 Riwayat Penjualan Ayam</h2></div>
+          <div class="table-scroll">
+            <table class="excel-table" style="min-width: 100%;">
+              <thead>
+                <tr>
+                  <th>Tanggal</th><th>Utuh</th><th>½</th><th>¼</th><th>Total</th><th>Tusuk</th><th>Selisih</th><th>Ket</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyPenjualan"></tbody>
+            </table>
+          </div>
+          <button class="danger-btn" id="btnHapusPenjualan" onclick="hapusRiwayatPenjualan(this)">🗑️ Hapus Riwayat Penjualan</button>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin: 14px 2px 6px;">
+          <div style="font-weight:800; font-size:13px;">📊 Matrix Stok Realtime Berantai</div>
+          <div class="month-controls">
+            <select class="filter-select" id="selectBulanExcel" onchange="renderExcelMatrix()"></select>
+            <select class="filter-select" id="selectTahunExcel" onchange="renderExcelMatrix()"></select>
           </div>
         </div>
-        <div class="sale-note">
-          <label for="salesNote">Keterangan Penjualan</label>
-          <input id="salesNote" class="note-input" type="text" maxlength="200" placeholder="Keterangan penjualan hari ini (opsional)">
-        </div>
-        <button class="sale-save" onclick="simpanPenjualan()">💾 Simpan Penjualan Hari Ini</button>
-        <div id="salesSaveStatus" class="save-status"></div>
-      </div>
 
-      <div class="section-title">📊 Stock Barang <small>posisi stock terkini semua item</small></div>
-      <div class="card chart-card">
-        <div class="chart-wrap"><canvas id="stockChart"></canvas></div>
-        <div class="legend-list" id="legendList"></div>
-      </div>
+        <div class="item-filter-tabs" id="itemFilterTabs"></div>
+        <div id="excelItemSheetsContainer"></div>
 
+        <div class="footer"><b>Ayam Guling Enakko</b><br>Pencatatan Stok & Penjualan</div>
+      </div>
     </div>
-  </div>
 
-  <!-- ======================= STOCK ======================= -->
-  <div id="page-stock" class="page">
-    <div class="pagewrap">
-      <div class="header">
-        <h1>Stock Barang Hari Ini</h1>
-        <p>Catat stok fisik tiap item</p>
-      </div>
+  </div> <!-- END PAGES CONTAINER -->
 
-      <div id="stockCards"></div>
-
-      <div class="stock-actions">
-        <button class="save" onclick="simpanSemuaStock()">💾 Simpan Semua Stock Ke Matrix</button>
-      </div>
-      <div id="stockSaveStatus" class="save-status"></div>
-    </div>
-  </div>
-
-  <!-- ======================= RIWAYAT ======================= -->
-  <div id="page-riwayat" class="page">
-    <div class="pagewrap">
-      <div class="header">
-        <h1>Riwayat & Matrix Excel</h1>
-        <p>Data penjualan &amp; stok berantai otomatis (Tgl 1 - 31)</p>
-      </div>
-
-      <div class="card">
-        <div class="riwayat-head"><h2>🧮 Riwayat Penjualan Ayam</h2></div>
-        <div class="table-scroll">
-          <table class="excel-table" style="min-width: 100%;">
-            <thead>
-              <tr>
-                <th>Tanggal</th><th>Utuh</th><th>½</th><th>¼</th><th>Total</th><th>Tusuk</th><th>Selisih</th><th>Keterangan</th>
-              </tr>
-            </thead>
-            <tbody id="tbodyPenjualan"></tbody>
-          </table>
-        </div>
-        <button class="danger-btn" id="btnHapusPenjualan" onclick="hapusRiwayatPenjualan(this)">🗑️ Hapus Riwayat Penjualan</button>
-      </div>
-
-      <!-- KONTROL MATRIX EXCEL VERTIKAL -->
-      <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 3px 6px;">
-        <div style="font-weight:700; font-size:13px;">📊 Matrix Stok Realtime Berantai</div>
-        <div class="month-controls">
-          <select class="filter-select" id="selectBulanExcel" onchange="renderExcelMatrix()"></select>
-          <select class="filter-select" id="selectTahunExcel" onchange="renderExcelMatrix()"></select>
-        </div>
-      </div>
-
-      <!-- TAB FILTER CEPAT ITEM -->
-      <div class="item-filter-tabs" id="itemFilterTabs"></div>
-      
-      <!-- Container Kartu-Kartu Tabel Vertikal -->
-      <div id="excelItemSheetsContainer"></div>
-
-      <div class="footer"><b>Ayam Guling Enakko</b><br>Sistem pencatatan stock &amp; penjualan</div>
-    </div>
-  </div>
-
+  <!-- FLOATING NAVIGATION BAR -->
   <nav class="bottomnav">
-    <button class="navbtn active" data-page="beranda" onclick="gotoPage('beranda')"><span class="nicon">🏠</span>Beranda</button>
-    <button class="navbtn" data-page="stock" onclick="gotoPage('stock')"><span class="nicon">📦</span>Stock</button>
-    <button class="navbtn" data-page="riwayat" onclick="gotoPage('riwayat')"><span class="nicon">🕒</span>Riwayat</button>
+    <button class="navbtn active" data-page="beranda" onclick="gotoPage('beranda', 0)"><span class="nicon">🏠</span>Beranda</button>
+    <button class="navbtn" data-page="stock" onclick="gotoPage('stock', 1)"><span class="nicon">📦</span>Stok</button>
+    <button class="navbtn" data-page="riwayat" onclick="gotoPage('riwayat', 2)"><span class="nicon">🕒</span>Riwayat</button>
   </nav>
 
 </div>
@@ -454,17 +415,12 @@ function loadJSON(key, fallback) {
   try {
     const val = localStorage.getItem(key);
     return val ? JSON.parse(val) : fallback;
-  } catch (e) { 
-    return fallback; 
-  }
+  } catch (e) { return fallback; }
 }
 
 function saveJSON(key, value) {
-  try { 
-    localStorage.setItem(key, JSON.stringify(value)); 
-  } catch (e) { 
-    console.error('Gagal menyimpan ke localStorage:', key, e); 
-  }
+  try { localStorage.setItem(key, JSON.stringify(value)); } 
+  catch (e) { console.error('Gagal menyimpan:', key, e); }
 }
 
 /* =========================
@@ -505,14 +461,11 @@ function hitungEkspresi(val) {
   if (typeof val === 'number') return val;
   var teks = String(val).trim().replace(/,/g, '.');
   if (!teks) return 0;
-  
   if (/^[0-9.+-/*\s]+$/.test(teks)) {
     try {
       var hasil = Function('"use strict"; return (' + teks + ')')();
       return isNaN(hasil) || !isFinite(hasil) ? 0 : hasil;
-    } catch (e) {
-      return 0;
-    }
+    } catch (e) { return 0; }
   }
   var angkaSaja = parseFloat(teks);
   return isNaN(angkaSaja) ? 0 : angkaSaja;
@@ -520,41 +473,40 @@ function hitungEkspresi(val) {
 
 function angka(id) { 
   var input = document.getElementById(id);
-  if (!input) return 0;
-  return hitungEkspresi(input.value); 
+  return input ? hitungEkspresi(input.value) : 0; 
 }
 
 function format(n) {
   if (n === '' || n === null || n === undefined || isNaN(n)) return '';
   var hasil = Math.round(n * 100) / 100;
-  if (Number.isInteger(hasil)) return hasil.toString();
-  return hasil.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+  return Number.isInteger(hasil) ? hasil.toString() : hasil.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
 }
 
 function formatTanggalPendek(d) {
   var bulan = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
-  var jam = String(d.getHours()).padStart(2,'0');
-  var menit = String(d.getMinutes()).padStart(2,'0');
-  return d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear() + ", " + jam + ":" + menit;
+  return d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear() + ", " + String(d.getHours()).padStart(2,'0') + ":" + String(d.getMinutes()).padStart(2,'0');
 }
 
 function tampilTanggal() {
   var hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
   var bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
   var d = new Date();
-  document.getElementById("tanggal").textContent =
-    hari[d.getDay()] + ", " + d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear();
+  document.getElementById("tanggal").textContent = hari[d.getDay()] + ", " + d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear();
 }
 
 /* =========================
-   NAVIGASI
+   SLIDE NAVIGASI HALAMAN
 ========================= */
-function gotoPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  document.querySelectorAll('.navbtn').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+function gotoPage(name, pageIndex) {
+  const container = document.getElementById('pagesContainer');
+  container.style.transform = `translateX(-${pageIndex * 33.3333}%)`;
+  
+  document.querySelectorAll('.navbtn').forEach(b => {
+    b.classList.toggle('active', b.dataset.page === name);
+  });
+
   if (name === 'beranda' && stockChartInstance) {
-    setTimeout(() => stockChartInstance.resize(), 50);
+    setTimeout(() => stockChartInstance.resize(), 300);
   }
 }
 
@@ -563,17 +515,13 @@ function gotoPage(name) {
 ========================= */
 function ubah(id, nilai) {
   var input = document.getElementById(id);
-  var nilaiAwal = hitungEkspresi(input.value);
-  var hasil = nilaiAwal + nilai;
-  if (hasil < 0) hasil = 0;
-  input.value = hasil;
+  var hasil = hitungEkspresi(input.value) + nilai;
+  input.value = hasil < 0 ? 0 : hasil;
   hitungPenjualan();
 }
 
 function hitungPenjualan() {
-  var utuh = angka("utuh");
-  var setengah = angka("setengah");
-  var seperempat = angka("seperempat");
+  var utuh = angka("utuh"), setengah = angka("setengah"), seperempat = angka("seperempat");
   var penjualan = utuh + (setengah * 0.5) + (seperempat * 0.25);
   document.getElementById("totalPenjualan").textContent = format(penjualan) + " ekor";
 
@@ -586,15 +534,15 @@ function hitungPenjualan() {
   var number = document.getElementById("differenceNumber");
 
   if (selisih < -0.001) {
-    box.style.background = "#f8e6e0"; label.style.color = "#b3261e"; number.style.color = "#b3261e";
+    box.style.background = "#fce8e6"; label.style.color = "#b3261e"; number.style.color = "#b3261e";
     label.textContent = "KURANG"; desc.textContent = "Penusukan lebih banyak";
     number.textContent = format(selisih) + " ekor";
   } else if (selisih > 0.001) {
-    box.style.background = "#fff0c7"; label.style.color = "#a36b00"; number.style.color = "#a36b00";
+    box.style.background = "#fff4d6"; label.style.color = "#a36b00"; number.style.color = "#a36b00";
     label.textContent = "LEBIH"; desc.textContent = "Penjualan lebih banyak";
     number.textContent = "+" + format(selisih) + " ekor";
   } else {
-    box.style.background = "#e8f3e9"; label.style.color = "#3f6b4a"; number.style.color = "#3f6b4a";
+    box.style.background = "#e6f4ea"; label.style.color = "#137333"; number.style.color = "#137333";
     label.textContent = "PAS"; desc.textContent = "Penjualan dan penusukan sama";
     number.textContent = "0 ekor";
   }
@@ -616,7 +564,7 @@ function simpanPenjualan() {
   });
 
   saveJSON('riwayat-penjualan', riwayatPenjualan);
-  document.getElementById('salesSaveStatus').textContent = '✓ Penjualan tersimpan · ' + formatTanggalPendek(tanggal);
+  document.getElementById('salesSaveStatus').textContent = '✓ Tersimpan · ' + formatTanggalPendek(tanggal);
   document.getElementById('salesNote').value = '';
   renderRiwayatPenjualan();
 }
@@ -632,19 +580,19 @@ function renderStockInputs() {
       '<div class="card-head"><div class="card-head-left"><div class="icon" style="background:' + item.color + '22">' + item.icon + '</div>' +
       '<div><h2>' + item.nama + '</h2><span>Satuan: ' + item.unit + '</span></div></div></div>' +
       '<div class="stock-body">' +
-        '<div class="stock-line"><div class="stock-label">Stok Awal<br><small style="color:#aaa;font-size:9px;">sisa kemarin / otomatis dari matrix</small></div>' +
-          '<input class="number-input" id="input-awal-' + item.id + '" data-item="' + item.id + '" data-field="awal" type="text" value="' + s.awal + '"></div>' +
-        '<div class="stock-line"><div class="stock-label">Masuk<br><small style="color:#aaa;font-size:9px;">tambahan barang</small></div>' +
-          '<input class="number-input" id="input-masuk-' + item.id + '" data-item="' + item.id + '" data-field="masuk" type="text" value="' + s.masuk + '"></div>' +
-        '<div class="stock-line"><div class="stock-label">Stok Akhir<br><small style="color:#aaa;font-size:9px;">sisa fisik saat ini</small></div>' +
-          '<input class="number-input akhir-input" id="input-akhir-' + item.id + '" data-item="' + item.id + '" data-field="akhir" type="text" value="' + s.akhir + '"></div>' +
+        '<div class="stock-line"><div class="stock-label">Stok Awal</div>' +
+          '<input class="number-input" id="input-awal-' + item.id + '" type="text" value="' + s.awal + '"></div>' +
+        '<div class="stock-line"><div class="stock-label">Masuk</div>' +
+          '<input class="number-input" id="input-masuk-' + item.id + '" type="text" value="' + s.masuk + '"></div>' +
+        '<div class="stock-line"><div class="stock-label">Stok Akhir</div>' +
+          '<input class="number-input" id="input-akhir-' + item.id + '" type="text" value="' + s.akhir + '"></div>' +
         '<div class="stock-total" style="background:' + item.color + '"><label>TERPAKAI</label>' +
           '<div class="stock-total-input-wrap">' +
-            '<input class="stock-total-input" id="keluar-' + item.id + '" data-item="' + item.id + '" type="text" value="' + s.keluar + '">' +
+            '<input class="stock-total-input" id="keluar-' + item.id + '" type="text" value="' + s.keluar + '">' +
             '<span class="stock-unit-label">' + item.unit + '</span>' +
           '</div></div>' +
-        '<input class="note-input" id="input-ket-' + item.id + '" data-item="' + item.id + '" type="text" maxlength=200 placeholder="Keterangan (opsional)" value="' + escapeHTML(s.keterangan || '') + '">' +
-        '<button class="save stock-item-save" onclick="simpanStockItem(\'' + item.id + '\')">💾 Simpan ' + escapeHTML(item.nama) + ' Ke Matrix</button>' +
+        '<input class="note-input" id="input-ket-' + item.id + '" type="text" maxlength=200 placeholder="Keterangan (opsional)" value="' + escapeHTML(s.keterangan || '') + '">' +
+        '<button class="save stock-item-save" onclick="simpanStockItem(\'' + item.id + '\')">💾 Simpan ' + escapeHTML(item.nama) + '</button>' +
       '</div></div>';
   }).join('');
 
@@ -653,15 +601,14 @@ function renderStockInputs() {
       var el = document.getElementById('input-' + field + '-' + item.id);
       if (el) {
         el.addEventListener('input', function(e) {
-          var id = item.id;
-          var s = stockState[id];
+          var s = stockState[item.id];
           s[field] = hitungEkspresi(e.target.value);
           s.keluar = (s.awal + s.masuk) - s.akhir;
-          var inputKeluar = document.getElementById('keluar-' + id);
+          var inputKeluar = document.getElementById('keluar-' + item.id);
           if (inputKeluar) inputKeluar.value = s.keluar;
 
           renderChart();
-          if (id === 'ayam') syncPenusukanDenganAyam();
+          if (item.id === 'ayam') syncPenusukanDenganAyam();
         });
       }
     });
@@ -669,23 +616,20 @@ function renderStockInputs() {
     var elKeluar = document.getElementById('keluar-' + item.id);
     if (elKeluar) {
       elKeluar.addEventListener('input', function(e) {
-        var id = item.id;
-        var s = stockState[id];
+        var s = stockState[item.id];
         s.keluar = hitungEkspresi(e.target.value);
         s.akhir = (s.awal + s.masuk) - s.keluar;
-        var inputAkhir = document.getElementById('input-akhir-' + id);
+        var inputAkhir = document.getElementById('input-akhir-' + item.id);
         if (inputAkhir) inputAkhir.value = s.akhir;
 
         renderChart();
-        if (id === 'ayam') syncPenusukanDenganAyam();
+        if (item.id === 'ayam') syncPenusukanDenganAyam();
       });
     }
 
     var elKet = document.getElementById('input-ket-' + item.id);
     if (elKet) {
-      elKet.addEventListener('input', function(e) {
-        stockState[item.id].keterangan = e.target.value;
-      });
+      elKet.addEventListener('input', function(e) { stockState[item.id].keterangan = e.target.value; });
     }
   });
 }
@@ -700,7 +644,7 @@ function syncPenusukanDenganAyam() {
 }
 
 /* =========================
-   EKSSEKUSI LANGSUNG STOK AKHIR KE STOK AWAL
+   EKSEKUSI LANGSUNG STOK AKHIR KE STOK AWAL
 ========================= */
 function simpanStockItem(itemId) {
   var item = STOCK_ITEMS.find(function (i) { return i.id === itemId; });
@@ -710,10 +654,8 @@ function simpanStockItem(itemId) {
   var d = new Date();
   s.tanggal = d.toDateString();
 
-  // 1. Simpan data hari ini ke Matrix
   updateSingleDayMatrix(d.getFullYear(), d.getMonth() + 1, d.getDate(), itemId, s.awal, s.masuk, s.keluar, s.akhir, s.keterangan);
 
-  // 2. Eksekusi langsung Stok Akhir menjadi Stok Awal baru di form input
   s.awal = s.akhir;
   s.masuk = 0;
   s.keluar = 0;
@@ -724,8 +666,7 @@ function simpanStockItem(itemId) {
   renderStockInputs();
   renderExcelMatrix();
   
-  document.getElementById('stockSaveStatus').textContent =
-    '✓ ' + item.nama + ' tersimpan & dieksekusi jadi Stok Awal baru · ' + formatTanggalPendek(d);
+  document.getElementById('stockSaveStatus').textContent = '✓ ' + item.nama + ' tersimpan & dieksekusi ke Stok Awal!';
   renderChart();
 }
 
@@ -735,10 +676,8 @@ function simpanSemuaStock() {
     var s = stockState[item.id];
     s.tanggal = d.toDateString();
     
-    // 1. Simpan data hari ini ke Matrix
     updateSingleDayMatrix(d.getFullYear(), d.getMonth() + 1, d.getDate(), item.id, s.awal, s.masuk, s.keluar, s.akhir, s.keterangan);
     
-    // 2. Eksekusi langsung Stok Akhir menjadi Stok Awal baru di form input
     s.awal = s.akhir;
     s.masuk = 0;
     s.keluar = 0;
@@ -750,7 +689,7 @@ function simpanSemuaStock() {
   renderStockInputs();
   renderExcelMatrix();
   
-  document.getElementById('stockSaveStatus').textContent = '✓ Semua stock tersimpan & dieksekusi jadi Stok Awal baru · ' + formatTanggalPendek(d);
+  document.getElementById('stockSaveStatus').textContent = '✓ Semua stok tersimpan & dieksekusi ke Stok Awal!';
   renderChart();
 }
 
@@ -761,12 +700,9 @@ function renderChart() {
   var canvas = document.getElementById('stockChart');
   if (!canvas || typeof Chart === 'undefined') return;
 
-  var labels = STOCK_ITEMS.map(function (i) { return i.icon + ' ' + i.nama; });
-  
-  var data = STOCK_ITEMS.map(function (i) {
-    return stockState[i.id] ? (Number(stockState[i.id].akhir) || 0) : 0;
-  });
-  var colors = STOCK_ITEMS.map(function (i) { return i.color; });
+  var labels = STOCK_ITEMS.map(i => i.icon + ' ' + i.nama);
+  var data = STOCK_ITEMS.map(i => stockState[i.id] ? (Number(stockState[i.id].akhir) || 0) : 0);
+  var colors = STOCK_ITEMS.map(i => i.color);
 
   if (stockChartInstance) {
     stockChartInstance.data.labels = labels;
@@ -776,32 +712,24 @@ function renderChart() {
   } else {
     stockChartInstance = new Chart(canvas, {
       type: 'bar',
-      data: { labels: labels, datasets: [{ label: 'Stok saat ini', data: data, backgroundColor: colors, borderRadius: 8, maxBarThickness: 22 }] },
+      data: { labels: labels, datasets: [{ label: 'Stok saat ini', data: data, backgroundColor: colors, borderRadius: 6, maxBarThickness: 18 }] },
       options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: function (ctx) {
-            var item = STOCK_ITEMS[ctx.dataIndex];
-            return format(ctx.raw) + ' ' + item.unit;
-          } } }
-        },
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
         scales: {
-          x: { beginAtZero: true, grid: { color: '#eee9df' }, ticks: { font: { size: 10 } } },
-          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+          x: { beginAtZero: true, grid: { color: '#eee9df' }, ticks: { font: { size: 9 } } },
+          y: { grid: { display: false }, ticks: { font: { size: 10 } } }
         }
       }
     });
   }
 
   var legend = document.getElementById('legendList');
-  legend.innerHTML = STOCK_ITEMS.map(function (item, idx) {
-    return '<div class="legend-row"><div class="legend-dot" style="background:' + item.color + '"></div>' +
-      '<div class="legend-name">' + item.nama + '</div>' +
-      '<div class="legend-val">' + format(data[idx]) + ' ' + item.unit + '</div></div>';
-  }).join('');
+  legend.innerHTML = STOCK_ITEMS.map((item, idx) => 
+    '<div class="legend-row"><div class="legend-dot" style="background:' + item.color + '"></div>' +
+    '<div class="legend-name">' + item.nama + '</div>' +
+    '<div class="legend-val">' + format(data[idx]) + ' ' + item.unit + '</div></div>'
+  ).join('');
 }
 
 function escapeHTML(value) {
@@ -816,13 +744,10 @@ function escapeHTML(value) {
 function renderFilterTabs() {
   const container = document.getElementById('itemFilterTabs');
   if (!container) return;
-
-  let tabsHtml = `<button class="tab-btn ${selectedFilterItem === 'all' ? 'active' : ''}" onclick="filterMatrixItem('all')">✨ Semua Item</button>`;
-  
+  let tabsHtml = `<button class="tab-btn ${selectedFilterItem === 'all' ? 'active' : ''}" onclick="filterMatrixItem('all')">✨ Semua</button>`;
   STOCK_ITEMS.forEach(item => {
     tabsHtml += `<button class="tab-btn ${selectedFilterItem === item.id ? 'active' : ''}" onclick="filterMatrixItem('${item.id}')">${item.icon} ${item.nama}</button>`;
   });
-
   container.innerHTML = tabsHtml;
 }
 
@@ -838,13 +763,10 @@ function filterMatrixItem(itemId) {
 function initExcelDropdowns() {
   const selectBulan = document.getElementById('selectBulanExcel');
   const selectTahun = document.getElementById('selectTahunExcel');
-  
   const namaBulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
   const d = new Date();
   
-  selectBulan.innerHTML = namaBulan.map((b, idx) => 
-    `<option value="${idx + 1}" ${idx === d.getMonth() ? 'selected' : ''}>${b}</option>`
-  ).join('');
+  selectBulan.innerHTML = namaBulan.map((b, idx) => `<option value="${idx + 1}" ${idx === d.getMonth() ? 'selected' : ''}>${b}</option>`).join('');
 
   const currentYear = d.getFullYear();
   let optTahun = '';
@@ -922,7 +844,7 @@ function renderExcelMatrix() {
     : STOCK_ITEMS.filter(i => i.id === selectedFilterItem);
 
   if (itemsToRender.length === 0) {
-    container.innerHTML = '<div style="text-align:center; padding:30px; color:#888;">Item tidak ditemukan.</div>';
+    container.innerHTML = '<div style="text-align:center; padding:20px; color:#888;">Kosong.</div>';
     return;
   }
 
@@ -931,12 +853,12 @@ function renderExcelMatrix() {
     const itemData = monthData[item.id] || {};
 
     let theadHtml = `<tr>
-      <th style="width:40px;">Tgl</th>
-      <th style="width:65px;">Awal</th>
-      <th style="width:65px;">Masuk</th>
-      <th style="width:65px;">Keluar</th>
-      <th style="width:65px;">Akhir</th>
-      <th>Keterangan</th>
+      <th style="width:35px;">Tgl</th>
+      <th style="width:60px;">Awal</th>
+      <th style="width:60px;">Masuk</th>
+      <th style="width:60px;">Keluar</th>
+      <th style="width:60px;">Akhir</th>
+      <th>Ket</th>
     </tr>`;
 
     let totalMasuk = 0, totalKeluar = 0;
@@ -965,19 +887,17 @@ function renderExcelMatrix() {
     }
 
     let tfootHtml = `<tr class="excel-total-row">
-      <td>Total</td>
-      <td>—</td>
+      <td>Total</td><td>—</td>
       <td>${format(totalMasuk)}</td>
       <td>${format(totalKeluar)}</td>
-      <td>—</td>
-      <td>—</td>
+      <td>—</td><td>—</td>
     </tr>`;
 
-    return `<div class="card" style="margin-bottom:15px;">
+    return `<div class="card" style="margin-bottom:12px;">
       <div class="card-head">
         <div class="card-head-left">
           <div class="icon" style="background:${item.color}22">${item.icon}</div>
-          <div><h2>${item.nama}</h2><span>Satuan: ${item.unit} · Input Bebas &amp; Berantai</span></div>
+          <div><h2>${item.nama}</h2><span>Satuan: ${item.unit}</span></div>
         </div>
       </div>
       <div class="table-scroll">
@@ -1008,21 +928,11 @@ function onMatrixCellChange(input, year, month, itemId, day, fieldKey) {
   } else {
     var hasilAngka = hitungEkspresi(input.value);
     if (fieldKey === 'awal') {
-      if (input.value !== '') {
-        dayObj.awal = hasilAngka;
-        dayObj.isManualAwal = true;
-      } else {
-        dayObj.awal = '';
-        dayObj.isManualAwal = false;
-      }
+      dayObj.awal = input.value !== '' ? hasilAngka : '';
+      dayObj.isManualAwal = input.value !== '';
     } else if (fieldKey === 'akhir') {
-      if (input.value !== '') {
-        dayObj.akhir = hasilAngka;
-        dayObj.isManualAkhir = true;
-      } else {
-        dayObj.akhir = '';
-        dayObj.isManualAkhir = false;
-      }
+      dayObj.akhir = input.value !== '' ? hasilAngka : '';
+      dayObj.isManualAkhir = input.value !== '';
     } else {
       dayObj[fieldKey] = input.value !== '' ? hasilAngka : '';
     }
@@ -1041,14 +951,14 @@ function onMatrixCellChange(input, year, month, itemId, day, fieldKey) {
 function renderRiwayatPenjualan() {
   var tbodyP = document.getElementById('tbodyPenjualan');
   if (riwayatPenjualan.length === 0) {
-    tbodyP.innerHTML = '<tr><td colspan="8" class="empty">Belum ada riwayat penjualan</td></tr>';
+    tbodyP.innerHTML = '<tr><td colspan="8" class="empty">Belum ada riwayat</td></tr>';
   } else {
     tbodyP.innerHTML = riwayatPenjualan.map(function (r) {
-      var warna = r.selisih < 0 ? '#b3261e' : (r.selisih > 0 ? '#a36b00' : '#3f6b4a');
+      var warna = r.selisih < 0 ? '#b3261e' : (r.selisih > 0 ? '#a36b00' : '#137333');
       var tanda = r.selisih > 0 ? '+' : '';
-      return '<tr><td style="padding:4px 8px;">' + r.tanggalLabel + '</td><td>' + format(r.utuh) + '</td><td>' + format(r.setengah) + '</td>' +
+      return '<tr><td style="padding:4px 6px;">' + r.tanggalLabel + '</td><td>' + format(r.utuh) + '</td><td>' + format(r.setengah) + '</td>' +
         '<td>' + format(r.seperempat) + '</td><td><b>' + format(r.total) + '</b></td><td>' + format(r.penusukan) + '</td>' +
-        '<td style="color:' + warna + '">' + tanda + format(r.selisih) + '</td><td>' +
+        '<td style="color:' + warna + '; font-weight:bold;">' + tanda + format(r.selisih) + '</td><td>' +
         (r.keterangan ? escapeHTML(r.keterangan) : '<span style="color:#aaa">—</span>') + '</td></tr>';
     }).join('');
   }
@@ -1076,8 +986,7 @@ document.querySelectorAll('#page-beranda input').forEach(function (input) {
   input.addEventListener('keyup', hitungPenjualan);
   input.addEventListener('change', function() {
     if (this.id === 'utuh' || this.id === 'setengah' || this.id === 'seperempat' || this.id === 'penusukan') {
-      var hasil = hitungEkspresi(this.value);
-      this.value = hasil;
+      this.value = hitungEkspresi(this.value);
       hitungPenjualan();
     }
   });
@@ -1096,12 +1005,8 @@ function init() {
 
   STOCK_ITEMS.forEach(function (item) {
     var s = loadedState[item.id];
-    if (!s) {
-      stockState[item.id] = { awal: 0, masuk: 0, akhir: 0, keluar: 0, keterangan: '', tanggal: todayStr };
-    } else {
-      stockState[item.id] = s;
-      stockState[item.id].tanggal = todayStr;
-    }
+    stockState[item.id] = s ? s : { awal: 0, masuk: 0, akhir: 0, keluar: 0, keterangan: '', tanggal: todayStr };
+    stockState[item.id].tanggal = todayStr;
   });
 
   excelMatrixData = loadJSON('excel-matrix-data', {});
